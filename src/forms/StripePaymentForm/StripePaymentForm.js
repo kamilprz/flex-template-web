@@ -81,7 +81,6 @@ const initialState = {
   submitting: false,
   cardValueValid: false,
   token: null,
-  message: '',
 };
 
 /**
@@ -147,7 +146,7 @@ class StripePaymentForm extends Component {
       };
     });
   }
-  handleSubmit() {
+  handleSubmit(values) {
     const { onSubmit, stripePaymentTokenInProgress, stripePaymentToken } = this.props;
 
     if (stripePaymentTokenInProgress || !this.state.cardValueValid) {
@@ -157,7 +156,7 @@ class StripePaymentForm extends Component {
 
     if (stripePaymentToken) {
       // Token already fetched for the current card value
-      onSubmit({ token: stripePaymentToken, message: this.state.message.trim() });
+      onSubmit({ token: stripePaymentToken, message: values.initialMessage.trim() });
       return;
     }
 
@@ -167,11 +166,11 @@ class StripePaymentForm extends Component {
     };
 
     this.props.onCreateStripePaymentToken(params).then(() => {
-      onSubmit({ token: this.props.stripePaymentToken.id, message: this.state.message.trim() });
+      onSubmit({ token: this.props.stripePaymentToken.id, message: values.initialMessage.trim() });
     });
   }
 
-  paymentForm(fieldRenderProps) {
+  paymentForm(formRenderProps) {
     const {
       className,
       rootClassName,
@@ -185,7 +184,7 @@ class StripePaymentForm extends Component {
       stripePaymentTokenError,
       invalid,
       handleSubmit,
-    } = fieldRenderProps;
+    } = formRenderProps;
 
     const submitInProgress = stripePaymentTokenInProgress || inProgress;
     const submitDisabled = invalid || !this.state.cardValueValid || submitInProgress;
@@ -218,7 +217,7 @@ class StripePaymentForm extends Component {
         <FieldTextInput
           type="textarea"
           id={`${formId}-message`}
-          name={`${formId}-message`}
+          name="initialMessage"
           label={initialMessageLabel}
           placeholder={messagePlaceholder}
           className={css.message}
