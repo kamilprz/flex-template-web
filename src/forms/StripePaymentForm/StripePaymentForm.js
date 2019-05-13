@@ -182,10 +182,13 @@ class StripePaymentForm extends Component {
             intl,
             stripePaymentTokenInProgress,
             stripePaymentTokenError,
+            invalid,
+            handleSubmit,
           } = fieldRenderProps;
 
           const submitInProgress = stripePaymentTokenInProgress || inProgress;
-          const submitDisabled = !this.state.cardValueValid || submitInProgress;
+          const submitDisabled =
+            invalid  || !this.state.cardValueValid || submitInProgress;
           const classes = classNames(rootClassName || css.root, className);
           const cardClasses = classNames(css.card, {
             [css.cardSuccess]: this.state.cardValueValid,
