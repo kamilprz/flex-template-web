@@ -141,8 +141,7 @@ class StripePaymentForm extends Component {
       };
     });
   }
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit() {
     const { onSubmit, stripePaymentTokenInProgress, stripePaymentToken } = this.props;
 
     if (stripePaymentTokenInProgress || !this.state.cardValueValid) {
@@ -167,9 +166,11 @@ class StripePaymentForm extends Component {
   }
 
   render() {
+    const { onSubmit, ...rest } = this.props;
     return (
       <FinalForm
-        {...this.props}
+        onSubmit={this.handleSubmit}
+        {...rest}
         render={fieldRenderProps => {
           const {
             className,
@@ -187,8 +188,7 @@ class StripePaymentForm extends Component {
           } = fieldRenderProps;
 
           const submitInProgress = stripePaymentTokenInProgress || inProgress;
-          const submitDisabled =
-            invalid  || !this.state.cardValueValid || submitInProgress;
+          const submitDisabled = invalid || !this.state.cardValueValid || submitInProgress;
           const classes = classNames(rootClassName || css.root, className);
           const cardClasses = classNames(css.card, {
             [css.cardSuccess]: this.state.cardValueValid,
@@ -227,7 +227,7 @@ class StripePaymentForm extends Component {
           ) : null;
 
           return config.stripe.publishableKey ? (
-            <Form className={classes} onSubmit={this.handleSubmit}>
+            <Form className={classes} onSubmit={handleSubmit}>
               <h3 className={css.paymentHeading}>
                 <FormattedMessage id="StripePaymentForm.paymentHeading" />
               </h3>
