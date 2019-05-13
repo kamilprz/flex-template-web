@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, PrimaryButton, ExpandingTextarea } from '../../components';
+import { Form, PrimaryButton, FieldTextInput } from '../../components';
 import config from '../../config';
 import { propTypes } from '../../util/types';
 
@@ -177,7 +177,6 @@ class StripePaymentForm extends Component {
             inProgress,
             formId,
             paymentInfo,
-            onChange,
             authorDisplayName,
             showInitialMessageInput,
             intl,
@@ -198,22 +197,13 @@ class StripePaymentForm extends Component {
             { name: authorDisplayName }
           );
 
-          const handleMessageChange = e => {
-            // A change in the message should call the onChange prop with
-            // the current token and the new message.
-            const message = e.target.value;
-            this.setState(prevState => {
-              const { token } = prevState;
-              const newState = { token, message };
-              onChange(newState);
-              return newState;
-            });
-          };
+          const messageOptionalText = intl.formatMessage({
+            id: 'StripePaymentForm.messageOptionalText',
+          });
 
-          const messageOptionalText = (
-            <span className={css.messageOptional}>
-              <FormattedMessage id="StripePaymentForm.messageOptionalText" />
-            </span>
+          const initialMessageLabel = intl.formatMessage(
+            { id: 'StripePaymentForm.messageLabel' },
+            { messageOptionalText: messageOptionalText }
           );
 
           const initialMessage = showInitialMessageInput ? (
@@ -221,18 +211,14 @@ class StripePaymentForm extends Component {
               <h3 className={css.messageHeading}>
                 <FormattedMessage id="StripePaymentForm.messageHeading" />
               </h3>
-              <label className={css.messageLabel} htmlFor={`${formId}-message`}>
-                <FormattedMessage
-                  id="StripePaymentForm.messageLabel"
-                  values={{ messageOptionalText }}
-                />
-              </label>
-              <ExpandingTextarea
+
+              <FieldTextInput
+                type="textarea"
                 id={`${formId}-message`}
-                className={css.message}
+                name={`${formId}-message`}
+                label={initialMessageLabel}
                 placeholder={messagePlaceholder}
-                value={this.state.message}
-                onChange={handleMessageChange}
+                className={css.message}
               />
             </div>
           ) : null;
