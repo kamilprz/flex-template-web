@@ -5,6 +5,7 @@ import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import { Form, PrimaryButton, ExpandingTextarea } from '../../components';
 import config from '../../config';
+import { propTypes } from '../../util/types';
 
 import css from './StripePaymentForm.css';
 
@@ -285,6 +286,8 @@ StripePaymentForm.defaultProps = {
   onChange: () => null,
   showInitialMessageInput: true,
   stripePaymentToken: null,
+  stripePaymentTokenInProgress: false,
+  stripePaymentTokenError: null,
 };
 
 const { bool, func, string, object } = PropTypes;
@@ -301,8 +304,8 @@ StripePaymentForm.propTypes = {
   authorDisplayName: string.isRequired,
   showInitialMessageInput: bool,
   onCreateStripePaymentToken: func.isRequired,
-  stripePaymentTokenInProgress: bool.isRequired,
-  stripePaymentTokenError: bool.isRequired,
+  stripePaymentTokenInProgress: bool,
+  stripePaymentTokenError: propTypes.error,
   stripePaymentToken: object,
 };
 
