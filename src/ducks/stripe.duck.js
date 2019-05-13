@@ -509,7 +509,7 @@ export const createStripePaymentToken = params => dispatch => {
     })
     .catch(err => {
       const e = storableError(err);
-      dispatch(stripeAccountCreateError(e));
+      dispatch(stripePaymentTokenCreateError(e));
       const stripeMessage =
         e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
           ? e.apiErrors[0].meta.stripeMessage
