@@ -22,6 +22,10 @@ export const STRIPE_PAYMENT_TOKEN_CREATE_REQUEST = 'app/stripe/STRIPE_PAYMENT_TO
 export const STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS = 'app/stripe/STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS';
 export const STRIPE_PAYMENT_TOKEN_CREATE_ERROR = 'app/stripe/STRIPE_PAYMENT_TOKEN_CREATE_ERROR';
 
+export const HANDLE_CARD_PAYMENT_REQUEST = 'app/stripe/HANDLE_CARD_PAYMENT_REQUEST';
+export const HANDLE_CARD_PAYMENT_SUCCESS = 'app/stripe/HANDLE_CARD_PAYMENT_SUCCESS';
+export const HANDLE_CARD_PAYMENT_ERROR = 'app/stripe/HANDLE_CARD_PAYMENT_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -36,6 +40,9 @@ const initialState = {
   stripePaymentTokenInProgress: false,
   stripePaymentTokenError: false,
   stripePaymentToken: null,
+  handleCardPaymentInProgress: false,
+  handleCardPaymentError: null,
+  paymentIntent: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -113,6 +120,18 @@ export default function reducer(state = initialState, action = {}) {
       console.error(payload);
       return { ...state, stripePaymentTokenError: payload, stripePaymentTokenInProgress: false };
 
+    case HANDLE_CARD_PAYMENT_REQUEST:
+      return {
+        ...state,
+        handleCardPaymentError: null,
+        handleCardPaymentInProgress: true,
+      };
+    case HANDLE_CARD_PAYMENT_SUCCESS:
+      return { ...state, paymentIntent: payload, handleCardPaymentInProgress: false };
+    case HANDLE_CARD_PAYMENT_ERROR:
+      console.error(payload);
+      return { ...state, handleCardPaymentError: payload, handleCardPaymentInProgress: false };
+
     default:
       return state;
   }
@@ -180,6 +199,21 @@ export const stripePaymentTokenCreateSuccess = payload => ({
 
 export const stripePaymentTokenCreateError = payload => ({
   type: STRIPE_PAYMENT_TOKEN_CREATE_ERROR,
+  payload,
+  error: true,
+});
+
+export const handleCardPaymentRequest = () => ({
+  type: HANDLE_CARD_PAYMENT_REQUEST,
+});
+
+export const handleCardPaymentSuccess = payload => ({
+  type: HANDLE_CARD_PAYMENT_SUCCESS,
+  payload,
+});
+
+export const handleCardPaymentError = payload => ({
+  type: HANDLE_CARD_PAYMENT_ERROR,
   payload,
   error: true,
 });
@@ -492,6 +526,35 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   } else {
     return dispatch(createStripeCompanyAccount(payoutDetails, stripe));
   }
+};
+
+export const handleCardPayment = params => dispatch => {
+  // It's required to use the same instance of Stripe as where the card has been created
+  // so that's why Stripe needs to be passed here and we can't create a new instance.
+  const { stripe, card, clientSecret, paymentParams } = params;
+  const testData = paymentParams
+    ? paymentParams
+    : {
+        payment_method_data: {
+          billing_details: { name: 'Vesa Luusua' },
+        },
+      };
+
+  dispatch(handleCardPaymentRequest());
+
+  return stripe
+    .handleCardPayment(clientSecret, card, testData)
+    .then(response => {
+      console.log('Result of handleCardPayment:', response);
+      dispatch(handleCardPaymentSuccess(response));
+      return response;
+    })
+    .catch(err => {
+      const e = storableError(err);
+      dispatch(handleCardPaymentError(e));
+      log.error(err, 'stripe-handle-card-payment-failed', { stripeMessage: e.message });
+      throw e;
+    });
 };
 
 export const createStripePaymentToken = params => dispatch => {
