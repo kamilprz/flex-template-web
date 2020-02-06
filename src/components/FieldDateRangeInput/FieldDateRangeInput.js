@@ -5,13 +5,14 @@
  * you should convert value.date to start date and end date before submitting it to API
  */
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { bool, func, object, oneOf, string, arrayOf } from 'prop-types';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import { ValidationError } from '../../components';
+import FieldSelect from '../../components/FieldSelect/FieldSelect';
 
 import DateRangeInput from './DateRangeInput';
 import css from './FieldDateRangeInput.css';
@@ -26,12 +27,12 @@ class FieldDateRangeInputComponent extends Component {
     this.handleFocus = this.handleFocus.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     // Update focusedInput in case a new value for it is
     // passed in the props. This may occur if the focus
     // is manually set to the date picker.
-    if (nextProps.focusedInput && nextProps.focusedInput !== this.props.focusedInput) {
-      this.setState({ focusedInput: nextProps.focusedInput });
+    if (this.props.focusedInput && this.props.focusedInput !== prevProps.focusedInput) {
+      this.setState({ focusedInput: this.props.focusedInput });
     }
   }
 
@@ -63,6 +64,7 @@ class FieldDateRangeInputComponent extends Component {
       input,
       meta,
       useMobileMargins,
+      hourly,
       // Extract focusedInput and onFocusedInputChange so that
       // the same values will not be passed on to subcomponents.
       focusedInput,
@@ -117,7 +119,7 @@ class FieldDateRangeInputComponent extends Component {
       ) : null;
 
     // eslint-disable-next-line no-unused-vars
-    const { onBlur, onFocus, ...restOfInput } = input;
+    const { onBlur, onFocus, type, ...restOfInput } = input;
     const inputProps = {
       unitType,
       onBlur: this.handleBlur,
@@ -130,13 +132,14 @@ class FieldDateRangeInputComponent extends Component {
       startDateId,
       endDateId,
     };
+
     const classes = classNames(rootClassName || css.fieldRoot, className);
     const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
 
     return (
       <div className={classes}>
         {label}
-        <DateRangeInput {...inputProps} />
+        <DateRangeInput {...inputProps} hourly={hourly} />
         <div
           className={classNames(css.inputBorders, {
             [css.mobileMargins]: useMobileMargins && !this.state.focusedInput,

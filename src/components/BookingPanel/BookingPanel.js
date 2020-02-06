@@ -1,17 +1,17 @@
 import React from 'react';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import { arrayOf, bool, func, node, oneOfType, shape, string } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
+import { getListingCategory } from '../../util/data';
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
 import { ModalInMobile, Button } from '../../components';
-import { BookingDatesForm } from '../../forms';
+import { BookingDatesForm, BookingDatesTimeForm } from '../../forms';
 
 import css from './BookingPanel.css';
 
@@ -82,7 +82,9 @@ const BookingPanel = props => {
     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
     : null;
 
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isBabysitter = getListingCategory(listing) === 'babysitter';
+
+  const isNightly = unitType === LINE_ITEM_NIGHT && !isBabysitter;
   const isDaily = unitType === LINE_ITEM_DAY;
 
   const unitTranslationKey = isNightly
@@ -93,6 +95,8 @@ const BookingPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const titleClasses = classNames(titleClassName || css.bookingTitle);
+
+  const BookingDatesFormComponent = isBabysitter ? BookingDatesTimeForm : BookingDatesForm;
 
   return (
     <div className={classes}>
@@ -116,8 +120,9 @@ const BookingPanel = props => {
           {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
         </div>
         {showBookingDatesForm ? (
-          <BookingDatesForm
+          <BookingDatesFormComponent
             className={css.bookingForm}
+            formId="BookingPanel"
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
             unitType={unitType}
             onSubmit={onSubmit}
@@ -176,7 +181,7 @@ BookingPanel.propTypes = {
   onSubmit: func.isRequired,
   title: oneOfType([node, string]).isRequired,
   subTitle: oneOfType([node, string]),
-  authorDisplayName: string.isRequired,
+  authorDisplayName: oneOfType([node, string]).isRequired,
   onManageDisableScrolling: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,

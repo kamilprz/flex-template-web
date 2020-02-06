@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { bool, func, instanceOf, oneOf, shape, string, arrayOf } from 'prop-types';
 import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
-import { intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
 import { START_DATE, END_DATE } from '../../util/dates';
@@ -138,12 +138,12 @@ class DateRangeInputComponent extends Component {
     this.onFocusChange = this.onFocusChange.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     // Update focusedInput in case a new value for it is
     // passed in the props. This may occur if the focus
     // is manually set to the date picker.
-    if (nextProps.focusedInput && nextProps.focusedInput !== this.props.focusedInput) {
-      this.setState({ focusedInput: nextProps.focusedInput });
+    if (this.props.focusedInput && this.props.focusedInput !== prevProps.focusedInput) {
+      this.setState({ focusedInput: this.props.focusedInput });
     }
   }
 
@@ -216,6 +216,7 @@ class DateRangeInputComponent extends Component {
       children,
       render,
       timeSlots,
+      hourly,
       ...datePickerProps
     } = this.props;
     /* eslint-enable no-unused-vars */
@@ -225,7 +226,7 @@ class DateRangeInputComponent extends Component {
     const initialEndMoment = initialDates ? moment(initialDates.endDate) : null;
     const startDate =
       value && value.startDate instanceof Date ? moment(value.startDate) : initialStartMoment;
-    const endDate =
+    const endDate = (hourly && startDate) ||
       apiEndDateToPickerDate(unitType, value ? value.endDate : null) || initialEndMoment;
 
     let isDayBlocked = isDayBlockedFn(
@@ -272,7 +273,7 @@ class DateRangeInputComponent extends Component {
           onFocusChange={this.onFocusChange}
           startDate={startDate}
           endDate={endDate}
-          minimumNights={isDaily ? 0 : 1}
+          minimumNights={hourly ? 0 : 1}
           onDatesChange={this.onDatesChange}
           startDatePlaceholderText={startDatePlaceholderTxt}
           endDatePlaceholderText={endDatePlaceholderTxt}

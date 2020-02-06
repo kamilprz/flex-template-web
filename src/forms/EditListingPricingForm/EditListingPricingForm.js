@@ -2,7 +2,7 @@ import React from 'react';
 import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import config from '../../config';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
@@ -17,10 +17,11 @@ const { Money } = sdkTypes;
 export const EditListingPricingFormComponent = props => (
   <FinalForm
     {...props}
-    render={fieldRenderProps => {
+    render={formRenderProps => {
       const {
         className,
         disabled,
+        ready,
         handleSubmit,
         intl,
         invalid,
@@ -29,17 +30,23 @@ export const EditListingPricingFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-      } = fieldRenderProps;
+      } = formRenderProps;
 
       const unitType = config.bookingUnitType;
       const isNightly = unitType === LINE_ITEM_NIGHT;
       const isDaily = unitType === LINE_ITEM_DAY;
 
-      const translationKey = isNightly
+      let translationKey
+
+      translationKey = isNightly
         ? 'EditListingPricingForm.pricePerNight'
         : isDaily
         ? 'EditListingPricingForm.pricePerDay'
         : 'EditListingPricingForm.pricePerUnit';
+
+      if (props.listingCategory === 'babysitter') {
+        translationKey = 'EditListingPricingForm.pricePerUnit';
+      }
 
       const pricePerUnitMessage = intl.formatMessage({
         id: translationKey,
@@ -71,7 +78,7 @@ export const EditListingPricingFormComponent = props => (
         : priceRequired;
 
       const classes = classNames(css.root, className);
-      const submitReady = updated && pristine;
+      const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
       const { updateListingError, showListingsError } = fetchErrors || {};
@@ -120,6 +127,8 @@ EditListingPricingFormComponent.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
+  disabled: bool.isRequired,
+  ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
   fetchErrors: shape({

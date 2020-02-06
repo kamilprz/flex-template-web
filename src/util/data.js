@@ -179,6 +179,10 @@ export const ensureListing = listing => {
   return { ...empty, ...listing };
 };
 
+export const getListingCategory = (listing) => {
+  return listing && listing.attributes && listing.attributes.publicData && listing.attributes.publicData.category;
+};
+
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *
@@ -242,6 +246,37 @@ export const ensureDayAvailabilityPlan = availabilityPlan => {
 export const ensureAvailabilityException = availabilityException => {
   const empty = { id: null, type: 'availabilityException', attributes: {} };
   return { ...empty, ...availabilityException };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} stripeCustomer entity from API, which is to be ensured against null values
+ */
+export const ensureStripeCustomer = stripeCustomer => {
+  const empty = { id: null, type: 'stripeCustomer', attributes: {} };
+  return { ...empty, ...stripeCustomer };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} stripeCustomer entity from API, which is to be ensured against null values
+ */
+export const ensurePaymentMethodCard = stripePaymentMethod => {
+  const empty = {
+    id: null,
+    type: 'stripePaymentMethod',
+    attributes: { type: 'stripe-payment-method/card', card: {} },
+  };
+  const cardPaymentMethod = { ...empty, ...stripePaymentMethod };
+
+  if (cardPaymentMethod.attributes.type !== 'stripe-payment-method/card') {
+    throw new Error(`'ensurePaymentMethodCard' got payment method with wrong type.
+      'stripe-payment-method/card' was expected, received ${cardPaymentMethod.attributes.type}`);
+  }
+
+  return cardPaymentMethod;
 };
 
 /**

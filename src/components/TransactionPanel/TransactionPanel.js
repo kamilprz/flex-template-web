@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { array, arrayOf, bool, func, number, string } from 'prop-types';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import {
+  TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
   txIsAccepted,
   txIsCanceled,
   txIsDeclined,
   txIsEnquired,
+  txIsPaymentExpired,
+  txIsPaymentPending,
   txIsRequested,
   txHasBeenDelivered,
 } from '../../util/transaction';
@@ -16,10 +19,17 @@ import {
   ensureTransaction,
   ensureUser,
   userDisplayNameAsString,
+  getListingCategory,
 } from '../../util/data';
 import { isMobileSafari } from '../../util/userAgent';
 import { formatMoney } from '../../util/currency';
-import { AvatarLarge, BookingPanel, ReviewModal, UserDisplayName } from '../../components';
+import {
+  AvatarLarge,
+  BookingPanel,
+  NamedLink,
+  ReviewModal,
+  UserDisplayName,
+} from '../../components';
 import { SendMessageForm } from '../../forms';
 import config from '../../config';
 
@@ -32,6 +42,8 @@ import FeedSection from './FeedSection';
 import SaleActionButtonsMaybe from './SaleActionButtonsMaybe';
 import PanelHeading, {
   HEADING_ENQUIRED,
+  HEADING_PAYMENT_PENDING,
+  HEADING_PAYMENT_EXPIRED,
   HEADING_REQUESTED,
   HEADING_ACCEPTED,
   HEADING_DECLINED,
@@ -88,7 +100,7 @@ export class TransactionPanelComponent extends Component {
     this.scrollToMessage = this.scrollToMessage.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.isMobSaf = isMobileSafari();
   }
 
@@ -159,6 +171,7 @@ export class TransactionPanelComponent extends Component {
       oldestMessagePageFetched,
       messages,
       initialMessageFailed,
+      savePaymentMethodFailed,
       fetchMessagesInProgress,
       fetchMessagesError,
       sendMessageInProgress,
@@ -178,6 +191,7 @@ export class TransactionPanelComponent extends Component {
       onSubmitBookingRequest,
       timeSlots,
       fetchTimeSlotsError,
+      nextTransitions,
     } = this.props;
 
     const currentTransaction = ensureTransaction(transaction);
@@ -198,9 +212,26 @@ export class TransactionPanelComponent extends Component {
 
     const stateDataFn = tx => {
       if (txIsEnquired(tx)) {
+        const transitions = Array.isArray(nextTransitions)
+          ? nextTransitions.map(transition => {
+              return transition.attributes.name;
+            })
+          : [];
+        const hasCorrectNextTransition =
+          transitions.length > 0 && transitions.includes(TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY);
         return {
           headingState: HEADING_ENQUIRED,
-          showBookingPanel: isCustomer && !isProviderBanned,
+          showBookingPanel: isCustomer && !isProviderBanned && hasCorrectNextTransition,
+        };
+      } else if (txIsPaymentPending(tx)) {
+        return {
+          headingState: HEADING_PAYMENT_PENDING,
+          showDetailCardHeadings: isCustomer,
+        };
+      } else if (txIsPaymentExpired(tx)) {
+        return {
+          headingState: HEADING_PAYMENT_EXPIRED,
+          showDetailCardHeadings: isCustomer,
         };
       } else if (txIsRequested(tx)) {
         return {
@@ -254,7 +285,8 @@ export class TransactionPanelComponent extends Component {
       : currentListing.attributes.title;
 
     const unitType = config.bookingUnitType;
-    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const isBabysitter = getListingCategory(currentListing) === 'babysitter';
+    const isNightly = unitType === LINE_ITEM_NIGHT && !isBabysitter;
     const isDaily = unitType === LINE_ITEM_DAY;
 
     const unitTranslationKey = isNightly
@@ -294,6 +326,12 @@ export class TransactionPanelComponent extends Component {
     const sendingMessageNotAllowed = intl.formatMessage({
       id: 'TransactionPanel.sendingMessageNotAllowed',
     });
+
+    const paymentMethodsPageLink = (
+      <NamedLink name="PaymentMethodsPage">
+        <FormattedMessage id="TransactionPanel.paymentMethodsPageLink" />
+      </NamedLink>
+    );
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -336,6 +374,14 @@ export class TransactionPanelComponent extends Component {
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
             </div>
 
+            {savePaymentMethodFailed ? (
+              <p className={css.genericError}>
+                <FormattedMessage
+                  id="TransactionPanel.savePaymentMethodFailed"
+                  values={{ paymentMethodsPageLink }}
+                />
+              </p>
+            ) : null}
             <FeedSection
               rootClassName={css.feedContainer}
               currentTransaction={currentTransaction}
@@ -351,7 +397,7 @@ export class TransactionPanelComponent extends Component {
             />
             {showSendMessageForm ? (
               <SendMessageForm
-                form={this.sendMessageFormName}
+                formId={this.sendMessageFormName}
                 rootClassName={css.sendMessageForm}
                 messagePlaceholder={sendMessagePlaceholder}
                 inProgress={sendMessageInProgress}
@@ -403,6 +449,7 @@ export class TransactionPanelComponent extends Component {
                 />
               ) : null}
               <BreakdownMaybe
+                hourly={isBabysitter}
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
                 transactionRole={transactionRole}
@@ -437,14 +484,14 @@ TransactionPanelComponent.defaultProps = {
   acceptSaleError: null,
   declineSaleError: null,
   fetchMessagesError: null,
-  initialMessageFailed: null,
+  initialMessageFailed: false,
+  savePaymentMethodFailed: false,
   sendMessageError: null,
   sendReviewError: null,
   timeSlots: null,
   fetchTimeSlotsError: null,
+  nextTransitions: null,
 };
-
-const { arrayOf, bool, func, number, string } = PropTypes;
 
 TransactionPanelComponent.propTypes = {
   rootClassName: string,
@@ -456,6 +503,7 @@ TransactionPanelComponent.propTypes = {
   oldestMessagePageFetched: number.isRequired,
   messages: arrayOf(propTypes.message).isRequired,
   initialMessageFailed: bool,
+  savePaymentMethodFailed: bool,
   fetchMessagesInProgress: bool.isRequired,
   fetchMessagesError: propTypes.error,
   sendMessageInProgress: bool.isRequired,
@@ -469,6 +517,7 @@ TransactionPanelComponent.propTypes = {
   onSubmitBookingRequest: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
+  nextTransitions: array,
 
   // Sale related props
   onAcceptSale: func.isRequired,

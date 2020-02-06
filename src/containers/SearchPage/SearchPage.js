@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { array, bool, func, number, oneOf, object, shape, string } from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -219,7 +219,7 @@ export class SearchPageComponent extends Component {
               categoryFilter: filters.categoryFilter,
               filtersFilter: filters.filtersFilter,
               priceFilter: filters.priceFilter,
-              dateRangeFilter: filters.dateRangeFilter,
+              dateRangeFilter: filters.dateRangeFilter
             }}
           />
           <ModalInMobile
@@ -366,7 +366,7 @@ SearchPage.loadData = (params, search) => {
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
-    'fields.listing': ['title', 'geolocation', 'price'],
+    'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
     'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     'limit.images': 1,

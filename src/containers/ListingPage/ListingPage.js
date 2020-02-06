@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import { array, arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -23,10 +23,12 @@ import {
   ensureOwnListing,
   ensureUser,
   userDisplayNameAsString,
+  getListingCategory,
 } from '../../util/data';
 import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
+import { initializeCardPaymentData } from '../../ducks/stripe.duck.js';
 import {
   Page,
   NamedLink,
@@ -90,7 +92,13 @@ export class ListingPageComponent extends Component {
   }
 
   handleSubmit(values) {
-    const { history, getListing, params, callSetInitialValues } = this.props;
+    const {
+      history,
+      getListing,
+      params,
+      callSetInitialValues,
+      onInitializeCardPaymentData,
+    } = this.props;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
@@ -103,12 +111,21 @@ export class ListingPageComponent extends Component {
         bookingStart: bookingDates.startDate,
         bookingEnd: bookingDates.endDate,
       },
+      confirmPaymentError: null,
     };
+
+    if (getListingCategory(listing) === 'babysitter') {
+      initialValues.bookingData.quantity =
+        parseInt(initialValues.bookingData.endTime) - parseInt(initialValues.bookingData.startTime);
+    }
 
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
     callSetInitialValues(setInitialValues, initialValues);
+
+    // Clear previous Stripe errors from store if there is any
+    onInitializeCardPaymentData();
 
     // Redirect to CheckoutPage
     history.push(
@@ -305,6 +322,7 @@ export class ListingPageComponent extends Component {
       userAndListingAuthorAvailable && currentListing.author.id.uuid === currentUser.id.uuid;
     const showContactUser = authorAvailable && (!currentUser || (currentUser && !isOwnListing));
 
+    const listingCategory = getListingCategory(currentListing);
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
 
@@ -414,6 +432,7 @@ export class ListingPageComponent extends Component {
                     hostLink={hostLink}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
+                    listingCategory={listingCategory}
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={filtersConfig} publicData={publicData} />
@@ -512,6 +531,7 @@ ListingPageComponent.propTypes = {
   sendEnquiryInProgress: bool.isRequired,
   sendEnquiryError: propTypes.error,
   onSendEnquiry: func.isRequired,
+  onInitializeCardPaymentData: func.isRequired,
 
   categoriesConfig: array,
   filtersConfig: array,
@@ -565,6 +585,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
+  onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the
