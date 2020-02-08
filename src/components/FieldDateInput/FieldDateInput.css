@@ -3,6 +3,11 @@
 .fieldRoot {
 }
 
+.timePickers {
+  width: calc(100vw - 48px);
+  margin: 0 24px;
+}
+
 .pickerSuccess {
   & :global(.DateInput_input) {
     border-bottom-color: var(--successColor);

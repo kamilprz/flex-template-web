@@ -11,6 +11,7 @@ import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { Button, Form, FieldCurrencyInput } from '../../components';
 import css from './EditListingPricingForm.css';
+import { getListingCategory } from '../../util/data';
 
 const { Money } = sdkTypes;
 
@@ -33,7 +34,7 @@ export const EditListingPricingFormComponent = props => (
       } = formRenderProps;
 
       const unitType = config.bookingUnitType;
-      const isNightly = unitType === LINE_ITEM_NIGHT;
+      const isNightly = unitType === LINE_ITEM_NIGHT && props.listingCategory !== "babysitter";
       const isDaily = unitType === LINE_ITEM_DAY;
 
       let translationKey

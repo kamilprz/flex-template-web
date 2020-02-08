@@ -10,7 +10,7 @@ import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { ValidationError } from '../../components';
 import { propTypes } from '../../util/types';
-import FieldSelect from "../FieldSelect/FieldSelect";
+import FieldSelect from '../FieldSelect/FieldSelect';
 
 import DateInput from './DateInput';
 import css from './FieldDateInput.css';
@@ -67,7 +67,6 @@ class FieldDateInputComponent extends Component {
       times.push(<option value={i}>{i}:00</option>);
     }
 
-
     return (
       <div className={classes}>
         {label ? (
@@ -76,13 +75,15 @@ class FieldDateInputComponent extends Component {
           </label>
         ) : null}
         <DateInput className={inputClasses} {...inputProps} />
-        <FieldSelect defaultValue={'9'} id="startTime" name="startTime" label="Start time:">
-          {times}
-        </FieldSelect>
-        <FieldSelect defaultValue={'17'} id="endTime" name="endTime" label="End time:">
-          {times}
-        </FieldSelect>
-        <ValidationError className={errorClasses} fieldMeta={meta} />
+        <div className={css.timePickers}>
+          <FieldSelect defaultValue={'9'} id="startTime" name="startTime" label="Start time:">
+            {times}
+          </FieldSelect>
+          <FieldSelect defaultValue={'17'} id="endTime" name="endTime" label="End time:">
+            {times}
+          </FieldSelect>
+          <ValidationError className={errorClasses} fieldMeta={meta} />
+        </div>
       </div>
     );
   }
