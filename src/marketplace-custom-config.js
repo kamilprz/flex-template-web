@@ -43,6 +43,7 @@ export const filters = [
 
 export const categories = [
   { key: 'babysitter', label: 'Babysitter' },
+  { key: 'babysitter_overnight', label: 'Overnight Babysitter' },
   { key: 'nanny', label: 'Nanny' },
   { key: 'childminder', label: 'Childminder' },
   { key: 'day_care', label: 'Day Care' },
