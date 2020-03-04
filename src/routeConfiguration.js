@@ -11,6 +11,7 @@ import {
   ListingPage,
   ManageListingsPage,
   NotFoundPage,
+  NoticeboardPage,
   PartnersPage,
   PasswordChangePage,
   PasswordRecoveryPage,
@@ -62,6 +63,11 @@ const routeConfiguration = () => {
       path: '/partners',
       name: 'PartnersPage',
       component: props => <PartnersPage {...props} />,
+    },
+    {
+      path: '/noticeboard',
+      name: 'NoticeboardPage',
+      component: props => <NoticeboardPage {...props} />,
     },
     {
       path: '/s',

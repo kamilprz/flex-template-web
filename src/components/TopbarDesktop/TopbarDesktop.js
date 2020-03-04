@@ -132,6 +132,14 @@ const TopbarDesktop = props => {
     </NamedLink>
   );
 
+  const noticeboardLink = (
+    <NamedLink name="NoticeboardPage" className={css.loginLink}>
+      <span className={css.partners}>
+        <FormattedMessage id="Noticeboard" />
+      </span>
+    </NamedLink>
+  );
+
   const partnersLink = (
     <NamedLink name="PartnersPage" className={css.loginLink}>
       <span className={css.partners}>
@@ -160,6 +168,7 @@ const TopbarDesktop = props => {
       {signupLink}
       {loginLink}
       <div className={css.divider} />
+      {noticeboardLink}
       {partnersLink}
     </nav>
   );
