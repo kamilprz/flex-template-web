@@ -5,6 +5,7 @@ import {
   CheckoutPage,
   ContactDetailsPage,
   EditListingPage,
+  EditNoticeboardListingPage,
   EmailVerificationPage,
   InboxPage,
   LandingPage,
@@ -68,6 +69,31 @@ const routeConfiguration = () => {
       path: '/noticeboard',
       name: 'NoticeboardPage',
       component: props => <NoticeboardPage {...props} />,
+    },
+    {
+      path: '/n/new',
+      name: 'NewNoticeboardListing',
+      auth: true,
+      component: () => (
+        <NamedRedirect
+          name="EditNoticeboardListingPage"
+          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description' }}
+        />
+      ),
+    },
+    {
+      path: '/n/:slug/:id/:type/:tab',
+      name: 'EditNoticeboardListingPage',
+      auth: true,
+      component: props => <EditNoticeboardListingPage {...props} />,
+      loadData: EditNoticeboardListingPage.loadData,
+    },
+    {
+      path: '/n/:slug/:id/:type/:tab/:returnURLType',
+      name: 'EditNoticeboardListingStripeOnboardingPage',
+      auth: true,
+      component: props => <EditNoticeboardListingPage {...props} />,
+      loadData: EditNoticeboardListingPage.loadData,
     },
     {
       path: '/s',

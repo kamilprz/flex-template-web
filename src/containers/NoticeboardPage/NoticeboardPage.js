@@ -1,5 +1,6 @@
 import React from 'react';
 import { bool, object } from 'prop-types';
+import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -9,18 +10,12 @@ import { propTypes } from '../../util/types';
 import config from '../../config';
 import {
   Page,
-  SectionHowItWorks,
-  SectionCategories,
-  LayoutSingleColumn,
-  LayoutWrapperTopbar,
-  LayoutWrapperMain,
-  LayoutWrapperFooter,
-  Footer,
+  NamedLink,
 } from '../../components';
+
 import { TopbarContainer } from '../../containers';
 
-import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
-import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
+
 import css from './NoticeboardPage.css';
 
 export const NoticeboardPageComponent = props => {
@@ -39,7 +34,7 @@ export const NoticeboardPageComponent = props => {
   const siteTitle = config.siteTitle;
   const schemaTitle = intl.formatMessage({ id: 'LandingPage.schemaTitle' }, { siteTitle });
   const schemaDescription = intl.formatMessage({ id: 'LandingPage.schemaDescription' });
-  const schemaImage = `${config.canonicalRootURL}${facebookImage}`;
+
 
   return (
     <Page
@@ -48,40 +43,28 @@ export const NoticeboardPageComponent = props => {
       contentType="website"
       description={schemaDescription}
       title={schemaTitle}
-      facebookImages={[{ url: facebookImage, width: 1200, height: 630 }]}
-      twitterImages={[
-        { url: `${config.canonicalRootURL}${twitterImage}`, width: 600, height: 314 },
-      ]}
+
       schema={{
         '@context': 'http://schema.org',
         '@type': 'WebPage',
         description: schemaDescription,
         name: schemaTitle,
-        image: [schemaImage],
       }}
     >
-      <LayoutSingleColumn>
-        <LayoutWrapperTopbar>
-          <TopbarContainer />
-        </LayoutWrapperTopbar>
-        <LayoutWrapperMain>
 
-          <ul className={css.sections}>
-            <li className={css.section}>
-              <div className={css.sectionContent}>
-                <SectionHowItWorks
-                  currentUserListing={currentUserListing}
-                  currentUserListingFetched={currentUserListingFetched}
-                  translationKey={'PartnersPage'}
-                />
-              </div>
-            </li>
-          </ul>
-        </LayoutWrapperMain>
-        <LayoutWrapperFooter>
-          <Footer />
-        </LayoutWrapperFooter>
-      </LayoutSingleColumn>
+
+    <TopbarContainer />
+
+    <div className={css.PlaceAnAd}>
+        Are you a parent hoping to advertise a job?
+        <NamedLink
+          name="NewNoticeboardListing"
+          className={css.PlaceAnAdLink}
+        >
+          <FormattedMessage id="Place an Ad Now" />
+        </NamedLink>
+    </div>
+
     </Page>
   );
 };
