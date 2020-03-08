@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { maxLength, required, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput } from '../../components';
-
+import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
 import css from './EditNoticeboardListingDescriptionForm.css';
 
@@ -32,15 +32,15 @@ const EditNoticeboardListingDescriptionFormComponent = props => (
         fetchErrors,
       } = formRenderProps;
 
-      const titleMessage = intl.formatMessage({ id: 'EditNoticeboardListingDescriptionForm.title' });
+      const titleMessage = intl.formatMessage({ id: 'What should we call you?' });
       const titlePlaceholderMessage = intl.formatMessage({
-        id: 'EditNoticeboardListingDescriptionForm.titlePlaceholder',
+        id: 'What name should appear on your profile',
       });
       const titleRequiredMessage = intl.formatMessage({
-        id: 'EditNoticeboardListingDescriptionForm.titleRequired',
+        id: 'You need to add a name',
       });
       const maxLengthMessage = intl.formatMessage(
-        { id: 'EditNoticeboardListingDescriptionForm.maxLength' },
+        { id: 'EditListingDescriptionForm.maxLength' },
         {
           maxLength: TITLE_MAX_LENGTH,
         }
@@ -60,26 +60,26 @@ const EditNoticeboardListingDescriptionFormComponent = props => (
       });
       const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
       const descriptionRequiredMessage = intl.formatMessage({
-        id: 'EditNoticeboardListingDescriptionForm.descriptionRequired',
+        id: 'A description is required',
       });
 
       const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
       const errorMessageUpdateListing = updateListingError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditNoticeboardListingDescriptionForm.updateFailed" />
+          <FormattedMessage id="EditListingDescriptionForm.updateFailed" />
         </p>
       ) : null;
 
       // This error happens only on first tab (of EditListingWizard)
       const errorMessageCreateListingDraft = createListingDraftError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditNoticeboardListingDescriptionForm.createListingDraftError" />
+          <FormattedMessage id="EditListingDescriptionForm.createListingDraftError" />
         </p>
       ) : null;
 
       const errorMessageShowListing = showListingsError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditNoticeboardListingDescriptionForm.showListingFailed" />
+          <FormattedMessage id="EditListingDescriptionForm.showListingFailed" />
         </p>
       ) : null;
 
@@ -113,6 +113,13 @@ const EditNoticeboardListingDescriptionFormComponent = props => (
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}
             validate={composeValidators(required(descriptionRequiredMessage))}
+          />
+
+          <CustomCategorySelectFieldMaybe
+            id="category"
+            name="category"
+            categories={categories}
+            intl={intl}
           />
 
           <FieldTextInput

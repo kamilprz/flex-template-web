@@ -22,7 +22,7 @@ import {
   getStripeConnectAccountLink,
 } from '../../ducks/stripeConnectAccount.duck';
 
-import { EditListingWizard, NamedRedirect, Page } from '../../components';
+import { EditNoticeboardListingWizard, NamedRedirect, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import {
@@ -162,8 +162,8 @@ export const EditNoticeboardListingPageComponent = props => {
     });
 
     const title = isNewListingFlow
-      ? intl.formatMessage({ id: 'EditNoticeboardListingPage.titleCreateListing' })
-      : intl.formatMessage({ id: 'EditNoticeboardListingPage.titleEditListing' });
+      ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
+      : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
     return (
       <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -173,7 +173,7 @@ export const EditNoticeboardListingPageComponent = props => {
           desktopClassName={css.desktopTopbar}
           mobileClassName={css.mobileTopbar}
         />
-        <EditListingWizard
+        <EditNoticeboardListingWizard
           id="EditListingWizard"
           className={css.wizard}
           params={params}

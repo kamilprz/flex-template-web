@@ -9,6 +9,11 @@ export { default as EditListingPhotosForm } from './EditListingPhotosForm/EditLi
 export { default as EditListingPoliciesForm } from './EditListingPoliciesForm/EditListingPoliciesForm';
 export { default as EditListingPricingForm } from './EditListingPricingForm/EditListingPricingForm';
 
+export { default as EditNoticeboardListingDescriptionForm } from './EditNoticeboardListingDescriptionForm/EditNoticeboardListingDescriptionForm';
+export { default as EditNoticeboardListingFeaturesForm } from './EditNoticeboardListingFeaturesForm/EditNoticeboardListingFeaturesForm';
+export { default as EditNoticeboardListingLocationForm } from './EditNoticeboardListingLocationForm/EditNoticeboardListingLocationForm';
+export { default as EditNoticeboardListingPhotosForm } from './EditNoticeboardListingPhotosForm/EditNoticeboardListingPhotosForm';
+export { default as EditNoticeboardListingPricingForm } from './EditNoticeboardListingPricingForm/EditNoticeboardListingPricingForm';
 
 export { default as EmailVerificationForm } from './EmailVerificationForm/EmailVerificationForm';
 export { default as EnquiryForm } from './EnquiryForm/EnquiryForm';
