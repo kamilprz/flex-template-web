@@ -13,7 +13,7 @@ import {
   EditListingAvailabilityPanel,
   EditNoticeboardListingDescriptionPanel,
 
-  EditNoticeboardListingTypeOfJobPanel,
+  EditNoticeboardListingJobDetailsPanel,
 
   EditNoticeboardListingFeaturesPanel,
   EditNoticeboardListingLocationPanel,
@@ -27,7 +27,7 @@ import css from './EditNoticeboardListingWizard.css';
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
 
-export const TYPE_OF_JOB = 'typeOfJob';
+export const JOB_DETAILS = 'jobDetails';
 
 export const FEATURES = 'features';
 export const POLICY = 'policy';
@@ -39,7 +39,7 @@ export const PHOTOS = 'photos';
 export const SUPPORTED_TABS = [
   DESCRIPTION,
 
-  TYPE_OF_JOB,
+  JOB_DETAILS,
 
   FEATURES,
   POLICY,
@@ -180,13 +180,13 @@ const EditNoticeboardListingWizardTab = props => {
         />
       );
     }
-    case TYPE_OF_JOB: {
+    case JOB_DETAILS: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'Next:Features'
         : 'EditNoticeboardListingWizard.saveEditTypeOfJob';
       return (
-        <EditNoticeboardListingTypeOfJobPanel
-          {...panelProps(TYPE_OF_JOB)}
+        <EditNoticeboardListingJobDetailsPanel
+          {...panelProps(JOB_DETAILS)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);

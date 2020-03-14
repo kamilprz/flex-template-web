@@ -9,9 +9,9 @@ import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Button, FieldCheckboxGroup, Form } from '../../components';
 
-import css from './EditNoticeboardListingTypeOfJobForm.css';
+import css from './EditNoticeboardListingJobDetailsForm.css';
 
-const EditNoticeboardListingTypeOfJobFormComponent = props => (
+const EditNoticeboardListingJobDetailsFormComponent = props => (
   <FinalForm
     {...props}
     mutators={{ ...arrayMutators }}
@@ -38,13 +38,13 @@ const EditNoticeboardListingTypeOfJobFormComponent = props => (
       const { updateListingError, showListingsError } = fetchErrors || {};
       const errorMessage = updateListingError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditNoticeboardListingTypeOfJobForm.updateFailed" />
+          <FormattedMessage id="EditNoticeboardListingJobDetailsForm.updateFailed" />
         </p>
       ) : null;
 
       const errorMessageShowListing = showListingsError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditNoticeboardListingTypeOfJobForm.showListingFailed" />
+          <FormattedMessage id="EditNoticeboardListingJobDetailsForm.showListingFailed" />
         </p>
       ) : null;
 
@@ -75,13 +75,13 @@ const EditNoticeboardListingTypeOfJobFormComponent = props => (
   />
 );
 
-EditNoticeboardListingTypeOfJobFormComponent.defaultProps = {
+EditNoticeboardListingJobDetailsFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   fetchErrors: null,
 };
 
-EditNoticeboardListingTypeOfJobFormComponent.propTypes = {
+EditNoticeboardListingJobDetailsFormComponent.propTypes = {
   rootClassName: string,
   className: string,
   name: string.isRequired,
@@ -97,6 +97,6 @@ EditNoticeboardListingTypeOfJobFormComponent.propTypes = {
   }),
 };
 
-const EditNoticeboardListingTypeOfJobForm = EditNoticeboardListingTypeOfJobFormComponent;
+const EditNoticeboardListingJobDetailsForm = EditNoticeboardListingJobDetailsFormComponent;
 
-export default EditNoticeboardListingTypeOfJobForm;
+export default EditNoticeboardListingJobDetailsForm;

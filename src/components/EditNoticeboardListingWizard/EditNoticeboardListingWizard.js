@@ -21,7 +21,7 @@ import EditNoticeboardListingWizardTab, {
   AVAILABILITY,
   DESCRIPTION,
 
-  TYPE_OF_JOB,
+  JOB_DETAILS,
   
   FEATURES,
   POLICY,
@@ -41,7 +41,7 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 export const TABS = [
   DESCRIPTION,
 
-  TYPE_OF_JOB,
+  JOB_DETAILS,
 
   FEATURES,
   LOCATION,
@@ -56,8 +56,8 @@ const tabLabel = (intl, tab) => {
   let key = null;
   if (tab === DESCRIPTION) {
     key = 'Description';
-  } else if (tab === TYPE_OF_JOB) {  ////
-    key = 'Type Of Job';
+  } else if (tab === JOB_DETAILS) {  ////
+    key = 'Job Details';
   } else if (tab === FEATURES) {
     key = 'Filters';
   } else if (tab === POLICY) {
@@ -98,8 +98,8 @@ const tabCompleted = (tab, listing) => {
     case DESCRIPTION:
       return !!(description && title);
 
-    case TYPE_OF_JOB:
-      return !!(publicData && publicData.typeOfJob);
+    case JOB_DETAILS:
+      return !!(publicData && publicData.typeOfJob); ///////////////
 
     case FEATURES:
       return !!(publicData && publicData.filters);

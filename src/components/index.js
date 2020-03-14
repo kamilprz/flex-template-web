@@ -165,7 +165,7 @@ export { default as EditListingPricingPanel } from './EditListingPricingPanel/Ed
 export { default as EditListingWizard } from './EditListingWizard/EditListingWizard';
 
 export { default as EditNoticeboardListingDescriptionPanel } from './EditNoticeboardListingDescriptionPanel/EditNoticeboardListingDescriptionPanel';
-export { default as EditNoticeboardListingTypeOfJobPanel } from './EditNoticeboardListingTypeOfJobPanel/EditNoticeboardListingTypeOfJobPanel';
+export { default as EditNoticeboardListingJobDetailsPanel } from './EditNoticeboardListingJobDetailsPanel/EditNoticeboardListingJobDetailsPanel';
 export { default as EditNoticeboardListingFeaturesPanel } from './EditNoticeboardListingFeaturesPanel/EditNoticeboardListingFeaturesPanel';
 export { default as EditNoticeboardListingLocationPanel } from './EditNoticeboardListingLocationPanel/EditNoticeboardListingLocationPanel';
 export { default as EditNoticeboardListingPhotosPanel } from './EditNoticeboardListingPhotosPanel/EditNoticeboardListingPhotosPanel';

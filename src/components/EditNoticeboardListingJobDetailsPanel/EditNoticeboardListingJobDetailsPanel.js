@@ -5,14 +5,14 @@ import { FormattedMessage } from '../../util/reactIntl';
 
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ensureListing } from '../../util/data';
-import { EditNoticeboardListingTypeOfJobForm } from '../../forms';
-import { ListingLink } from '../../components';
+import { EditNoticeboardListingJobDetailsForm } from '../../forms';
+import { ListingLink } from '..';
 
-import css from './EditNoticeboardListingTypeOfJobPanel.css';
+import css from './EditNoticeboardListingJobDetailsPanel.css';
 
-const FEATURES_NAME = 'typeOfJob';
+const FEATURES_NAME = 'jobDetails';
 
-const EditNoticeboardListingTypeOfJobPanel = props => {
+const EditNoticeboardListingJobDetailsPanel = props => {
   const {
     rootClassName,
     className,
@@ -34,7 +34,7 @@ const EditNoticeboardListingTypeOfJobPanel = props => {
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditNoticeboardListingTypeOfJobPanel.title"
+      id="EditNoticeboardListingJobDetailsPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
@@ -48,7 +48,7 @@ const EditNoticeboardListingTypeOfJobPanel = props => {
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditNoticeboardListingTypeOfJobForm
+      <EditNoticeboardListingJobDetailsForm
         className={css.form}
         name={FEATURES_NAME}
         initialValues={initialValues}
@@ -72,7 +72,7 @@ const EditNoticeboardListingTypeOfJobPanel = props => {
   );
 };
 
-EditNoticeboardListingTypeOfJobPanel.defaultProps = {
+EditNoticeboardListingJobDetailsPanel.defaultProps = {
   rootClassName: null,
   className: null,
   listing: null,
@@ -80,7 +80,7 @@ EditNoticeboardListingTypeOfJobPanel.defaultProps = {
 
 const { bool, func, object, string } = PropTypes;
 
-EditNoticeboardListingTypeOfJobPanel.propTypes = {
+EditNoticeboardListingJobDetailsPanel.propTypes = {
   rootClassName: string,
   className: string,
 
@@ -97,4 +97,4 @@ EditNoticeboardListingTypeOfJobPanel.propTypes = {
   errors: object.isRequired,
 };
 
-export default EditNoticeboardListingTypeOfJobPanel;
+export default EditNoticeboardListingJobDetailsPanel;
