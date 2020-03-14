@@ -70,3 +70,70 @@ export const dateRangeFilterConfig = {
 // export const keywordFilterConfig = {
 //   active: true,
 // };
+
+
+// Noticeboard filters
+export const typeOfJob = [
+  { key: 'flexible', label: 'Flexible' },
+  { key: 'part_time', label: 'Part Time' },
+  { key: 'full_time', label: 'Full Time' },
+  { key: 'all', label: 'All' },
+];
+
+export const durationOfJob = [
+  { key: 'short', label: 'Short Term' },
+  { key: 'medium', label: 'Medium Term' },
+  { key: 'long', label: 'Long Term' },
+  { key: 'all', label: 'All' },
+];
+
+export const timeframe = [
+  { key: 'urgent', label: 'Urgent'},
+  { key: 'immediate', label: 'Immediate Start' },
+  { key: 'in3months', label: 'Start in the next 3 months' },
+  { key: 'other', label: 'Other' },
+  { key: 'all', label: 'All' },
+];
+
+// type of childcare handled by categories from above
+
+export const location = [
+  { key: 'family_home', label: 'In Family\'s Home' },
+  { key: 'minder_home', label: 'In Minder\'s Home' },
+  { key: 'travel', label: 'Travel with Family' },
+];
+
+export const children = [
+  { key: 'new_born', label: 'New Born' },
+  { key: 'toddler', label: 'Toddler' },
+  { key: 'under10', label: 'Under 10' },
+  { key: 'special_needs', label: 'Special Needs' },
+];
+
+export const languages = [
+  { key: 'english', label: 'English' },
+  { key: 'spanish', label: 'Spanish' },
+  { key: 'french', label: 'French' },
+  { key: 'german', label: 'German' },
+  { key: 'portuguese', label: 'Portuguese' },
+  { key: 'chinese', label: 'Chinese' },
+  { key: 'other', label: 'Other' },
+];
+
+export const extras = [
+  { key: 'sports', label: 'Sports'},
+  { key: 'arts', label: 'Arts' },
+  { key: 'music', label: 'Music' },
+  { key: 'teaching', label: 'Teaching' },
+];
+
+export const qualifications = [
+  { key: 'first_aid', label: 'First Aid'},
+  { key: 'childcare', label: 'Childcare' },
+  { key: 'garda_vetting', label: 'Garda Vetting' },
+];
+
+export const ownInsurance = [
+  { key: 'yes', label: 'Yes'},
+  { key: 'no', label: 'No' },
+];

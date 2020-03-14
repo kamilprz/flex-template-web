@@ -10,6 +10,9 @@ export { default as EditListingPoliciesForm } from './EditListingPoliciesForm/Ed
 export { default as EditListingPricingForm } from './EditListingPricingForm/EditListingPricingForm';
 
 export { default as EditNoticeboardListingDescriptionForm } from './EditNoticeboardListingDescriptionForm/EditNoticeboardListingDescriptionForm';
+
+export { default as EditNoticeboardListingTypeOfJobForm } from './EditNoticeboardListingTypeOfJobForm/EditNoticeboardListingTypeOfJobForm';
+
 export { default as EditNoticeboardListingFeaturesForm } from './EditNoticeboardListingFeaturesForm/EditNoticeboardListingFeaturesForm';
 export { default as EditNoticeboardListingLocationForm } from './EditNoticeboardListingLocationForm/EditNoticeboardListingLocationForm';
 export { default as EditNoticeboardListingPhotosForm } from './EditNoticeboardListingPhotosForm/EditNoticeboardListingPhotosForm';

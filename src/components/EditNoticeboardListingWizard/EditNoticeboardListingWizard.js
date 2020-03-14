@@ -20,6 +20,9 @@ import { StripeConnectAccountForm } from '../../forms';
 import EditNoticeboardListingWizardTab, {
   AVAILABILITY,
   DESCRIPTION,
+
+  TYPE_OF_JOB,
+  
   FEATURES,
   POLICY,
   LOCATION,
@@ -37,6 +40,9 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 // and listing publishing happens after last panel.
 export const TABS = [
   DESCRIPTION,
+
+  TYPE_OF_JOB,
+
   FEATURES,
   LOCATION,
   PRICING,
@@ -50,6 +56,8 @@ const tabLabel = (intl, tab) => {
   let key = null;
   if (tab === DESCRIPTION) {
     key = 'Description';
+  } else if (tab === TYPE_OF_JOB) {  ////
+    key = 'Type Of Job';
   } else if (tab === FEATURES) {
     key = 'Filters';
   } else if (tab === POLICY) {
@@ -89,6 +97,10 @@ const tabCompleted = (tab, listing) => {
   switch (tab) {
     case DESCRIPTION:
       return !!(description && title);
+
+    case TYPE_OF_JOB:
+      return !!(publicData && publicData.typeOfJob);
+
     case FEATURES:
       return !!(publicData && publicData.filters);
     case POLICY:

@@ -12,6 +12,9 @@ import { createResourceLocatorString } from '../../util/routes';
 import {
   EditListingAvailabilityPanel,
   EditNoticeboardListingDescriptionPanel,
+
+  EditNoticeboardListingTypeOfJobPanel,
+
   EditNoticeboardListingFeaturesPanel,
   EditNoticeboardListingLocationPanel,
   EditNoticeboardListingPhotosPanel,
@@ -23,6 +26,9 @@ import css from './EditNoticeboardListingWizard.css';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
+
+export const TYPE_OF_JOB = 'typeOfJob';
+
 export const FEATURES = 'features';
 export const POLICY = 'policy';
 export const LOCATION = 'location';
@@ -32,6 +38,9 @@ export const PHOTOS = 'photos';
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   DESCRIPTION,
+
+  TYPE_OF_JOB,
+
   FEATURES,
   POLICY,
   LOCATION,
@@ -159,7 +168,7 @@ const EditNoticeboardListingWizardTab = props => {
   switch (tab) {
     case DESCRIPTION: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'Next:Filters'
+        ? 'Next:Type Of Job'
         : 'EditNoticeboardListingWizard.saveEditDescription';
       return (
         <EditNoticeboardListingDescriptionPanel
@@ -171,6 +180,21 @@ const EditNoticeboardListingWizardTab = props => {
         />
       );
     }
+    case TYPE_OF_JOB: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'Next:Features'
+        : 'EditNoticeboardListingWizard.saveEditTypeOfJob';
+      return (
+        <EditNoticeboardListingTypeOfJobPanel
+          {...panelProps(TYPE_OF_JOB)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+
     case FEATURES: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'Next:Location'
