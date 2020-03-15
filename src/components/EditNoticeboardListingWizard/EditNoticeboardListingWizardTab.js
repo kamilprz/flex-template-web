@@ -14,6 +14,7 @@ import {
   EditNoticeboardListingDescriptionPanel,
 
   EditNoticeboardListingJobDetailsPanel,
+  EditNoticeboardListingMinderDetailsPanel,
 
   EditNoticeboardListingFeaturesPanel,
   EditNoticeboardListingLocationPanel,
@@ -28,6 +29,7 @@ export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
 
 export const JOB_DETAILS = 'jobDetails';
+export const MINDER_DETAILS = 'minderDetails';
 
 export const FEATURES = 'features';
 export const POLICY = 'policy';
@@ -40,6 +42,7 @@ export const SUPPORTED_TABS = [
   DESCRIPTION,
 
   JOB_DETAILS,
+  MINDER_DETAILS,
 
   FEATURES,
   POLICY,
@@ -168,7 +171,7 @@ const EditNoticeboardListingWizardTab = props => {
   switch (tab) {
     case DESCRIPTION: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'Next:Type Of Job'
+        ? 'Next:Job details'
         : 'EditNoticeboardListingWizard.saveEditDescription';
       return (
         <EditNoticeboardListingDescriptionPanel
@@ -182,7 +185,7 @@ const EditNoticeboardListingWizardTab = props => {
     }
     case JOB_DETAILS: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'Next:Features'
+        ? 'Next:Minder Details'
         : 'EditNoticeboardListingWizard.saveEditTypeOfJob';
       return (
         <EditNoticeboardListingJobDetailsPanel
@@ -194,7 +197,20 @@ const EditNoticeboardListingWizardTab = props => {
         />
       );
     }
-
+    case MINDER_DETAILS: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'Next:Features'
+        : 'EditNoticeboardListingWizard.saveEditTypeOfJob';
+      return (
+        <EditNoticeboardListingMinderDetailsPanel
+          {...panelProps(MINDER_DETAILS)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
     case FEATURES: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'Next:Location'

@@ -22,6 +22,7 @@ import EditNoticeboardListingWizardTab, {
   DESCRIPTION,
 
   JOB_DETAILS,
+  MINDER_DETAILS,
   
   FEATURES,
   POLICY,
@@ -42,6 +43,7 @@ export const TABS = [
   DESCRIPTION,
 
   JOB_DETAILS,
+  MINDER_DETAILS,
 
   FEATURES,
   LOCATION,
@@ -58,6 +60,8 @@ const tabLabel = (intl, tab) => {
     key = 'Description';
   } else if (tab === JOB_DETAILS) {  ////
     key = 'Job Details';
+  } else if (tab === MINDER_DETAILS) {  ////
+    key = 'Minder Details';
   } else if (tab === FEATURES) {
     key = 'Filters';
   } else if (tab === POLICY) {
@@ -100,6 +104,8 @@ const tabCompleted = (tab, listing) => {
 
     case JOB_DETAILS:
       return !!(publicData && publicData.typeOfJob); ///////////////
+    case MINDER_DETAILS:
+      return !!(publicData && publicData.typeOfJob);
 
     case FEATURES:
       return !!(publicData && publicData.filters);
