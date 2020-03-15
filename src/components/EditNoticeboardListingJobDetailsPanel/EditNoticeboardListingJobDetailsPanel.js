@@ -41,9 +41,9 @@ const EditNoticeboardListingJobDetailsPanel = props => {
     <FormattedMessage id="Fill in some details about the job" />
   );
 
-  const filters = publicData && publicData.jobDetails;
+  const jobDetails = publicData && publicData.jobDetails;
  
-  const initialValues = { filters };
+  const initialValues = { jobDetails };
 
   return (
     <div className={classes}>
@@ -53,10 +53,10 @@ const EditNoticeboardListingJobDetailsPanel = props => {
         name={FEATURES_NAME}
         initialValues={initialValues}
         onSubmit={values => {
-          const { filters = [] } = values;
+          const { jobDetails = [] } = values;
 
           const updatedValues = {
-            publicData: { filters },
+            publicData: { jobDetails },
           };
           onSubmit(updatedValues);
         }}

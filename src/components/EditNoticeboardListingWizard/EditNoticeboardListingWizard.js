@@ -74,9 +74,9 @@ const tabCompleted = (tab, listing) => {
     case DESCRIPTION:
       return !!(description && title);
     case JOB_DETAILS:
-      return !!(publicData && publicData.jobDetails); ///////////////
+      return !!(publicData && publicData.jobDetails);
     case MINDER_DETAILS:
-      return !!(publicData && publicData.typeOfJob);
+      return !!(publicData && publicData.minderDetails);
     case PHOTOS:
       return images && images.length > 0;
     default:

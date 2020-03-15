@@ -5,7 +5,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ensureListing } from '../../util/data';
-import { EditNoticeboardListingJobDetailsForm } from '../../forms';
+import { EditNoticeboardListingMinderDetailsForm } from '../../forms';
 import { ListingLink } from '..';
 
 import css from './EditNoticeboardListingMinderDetailsPanel.css';
@@ -41,22 +41,22 @@ const EditNoticeboardListingMinderDetailsPanel = props => {
     <FormattedMessage id="What would you like to see in a minder?" />
   );
 
-  const filters = publicData && publicData.categories;
+  const minderDetails = publicData && publicData.minderDetails;
   console.log(publicData);
-  const initialValues = { filters };
+  const initialValues = { minderDetails };
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditNoticeboardListingJobDetailsForm
+      <EditNoticeboardListingMinderDetailsForm
         className={css.form}
         name={FEATURES_NAME}
         initialValues={initialValues}
         onSubmit={values => {
-          const { filters = [] } = values;
+          const { minderDetails = [] } = values;
 
           const updatedValues = {
-            publicData: { filters },
+            publicData: { minderDetails },
           };
           onSubmit(updatedValues);
         }}

@@ -178,7 +178,7 @@ const EditNoticeboardListingWizardTab = props => {
     case MINDER_DETAILS: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'Next:Photos'
-        : 'EditNoticeboardListingWizard.saveEditTypeOfJob';
+        : 'EditNoticeboardListingWizard.saveEditMinderDetails';
       return (
         <EditNoticeboardListingMinderDetailsPanel
           {...panelProps(MINDER_DETAILS)}
