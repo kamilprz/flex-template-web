@@ -18,22 +18,12 @@ import { Modal, NamedRedirect, Tabs, StripeConnectAccountStatusBox } from '../..
 import { StripeConnectAccountForm } from '../../forms';
 
 import EditNoticeboardListingWizardTab, {
-  AVAILABILITY,
   DESCRIPTION,
-
   JOB_DETAILS,
   MINDER_DETAILS,
-  
-  FEATURES,
-  POLICY,
-  LOCATION,
-  PRICING,
   PHOTOS,
 } from './EditNoticeboardListingWizardTab';
 import css from './EditNoticeboardListingWizard.css';
-
-// Show availability calendar only if environment variable availabilityEnabled is true
-const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 
 // You can reorder these panels.
 // Note 1: You need to change save button translations for new listing flow
@@ -41,13 +31,8 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 // and listing publishing happens after last panel.
 export const TABS = [
   DESCRIPTION,
-
   JOB_DETAILS,
   MINDER_DETAILS,
-
-  FEATURES,
-  LOCATION,
-  PRICING,
   PHOTOS,
 ];
 
@@ -62,16 +47,6 @@ const tabLabel = (intl, tab) => {
     key = 'Job Details';
   } else if (tab === MINDER_DETAILS) {  ////
     key = 'Minder Details';
-  } else if (tab === FEATURES) {
-    key = 'Filters';
-  } else if (tab === POLICY) {
-    key = 'EditNoticeboardListingWizard.tabLabelPolicy';
-  } else if (tab === LOCATION) {
-    key = 'Location';
-  } else if (tab === PRICING) {
-    key = 'Pricing';
-  } else if (tab === AVAILABILITY) {
-    key = 'EditNoticeboardListingWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
     key = 'Photos';
   }
@@ -89,10 +64,7 @@ const tabLabel = (intl, tab) => {
  */
 const tabCompleted = (tab, listing) => {
   const {
-    availabilityPlan,
     description,
-    geolocation,
-    price,
     title,
     publicData,
   } = listing.attributes;
@@ -101,22 +73,10 @@ const tabCompleted = (tab, listing) => {
   switch (tab) {
     case DESCRIPTION:
       return !!(description && title);
-
     case JOB_DETAILS:
       return !!(publicData && publicData.typeOfJob); ///////////////
     case MINDER_DETAILS:
       return !!(publicData && publicData.typeOfJob);
-
-    case FEATURES:
-      return !!(publicData && publicData.filters);
-    case POLICY:
-      return !!(publicData && typeof publicData.rules !== 'undefined');
-    case LOCATION:
-      return !!(geolocation && publicData && publicData.location && publicData.location.address);
-    case PRICING:
-      return !!price;
-    case AVAILABILITY:
-      return !!availabilityPlan;
     case PHOTOS:
       return images && images.length > 0;
     default:

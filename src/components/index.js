@@ -165,14 +165,9 @@ export { default as EditListingPricingPanel } from './EditListingPricingPanel/Ed
 export { default as EditListingWizard } from './EditListingWizard/EditListingWizard';
 
 export { default as EditNoticeboardListingDescriptionPanel } from './EditNoticeboardListingDescriptionPanel/EditNoticeboardListingDescriptionPanel';
-
 export { default as EditNoticeboardListingJobDetailsPanel } from './EditNoticeboardListingJobDetailsPanel/EditNoticeboardListingJobDetailsPanel';
 export { default as EditNoticeboardListingMinderDetailsPanel } from './EditNoticeboardListingMinderDetailsPanel/EditNoticeboardListingMinderDetailsPanel';
-
-export { default as EditNoticeboardListingFeaturesPanel } from './EditNoticeboardListingFeaturesPanel/EditNoticeboardListingFeaturesPanel';
-export { default as EditNoticeboardListingLocationPanel } from './EditNoticeboardListingLocationPanel/EditNoticeboardListingLocationPanel';
 export { default as EditNoticeboardListingPhotosPanel } from './EditNoticeboardListingPhotosPanel/EditNoticeboardListingPhotosPanel';
-export { default as EditNoticeboardListingPricingPanel } from './EditNoticeboardListingPricingPanel/EditNoticeboardListingPricingPanel';
 export { default as EditNoticeboardListingWizard } from './EditNoticeboardListingWizard/EditNoticeboardListingWizard';
 
 export { default as Footer } from './Footer/Footer';
