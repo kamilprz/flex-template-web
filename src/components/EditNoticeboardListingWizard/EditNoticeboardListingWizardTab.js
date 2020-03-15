@@ -72,7 +72,6 @@ const EditNoticeboardListingWizardTab = props => {
     newListingPublished,
     history,
     images,
-    availability,
     listing,
     handleCreateFlowTabScrolling,
     handlePublishListing,
@@ -165,7 +164,7 @@ const EditNoticeboardListingWizardTab = props => {
     case JOB_DETAILS: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'Next:Minder Details'
-        : 'EditNoticeboardListingWizard.saveEditTypeOfJob';
+        : 'EditNoticeboardListingWizard.saveEditJobDetails';
       return (
         <EditNoticeboardListingJobDetailsPanel
           {...panelProps(JOB_DETAILS)}

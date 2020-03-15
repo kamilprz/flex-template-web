@@ -53,11 +53,36 @@ const EditNoticeboardListingMinderDetailsFormComponent = props => (
           {errorMessage}
           {errorMessageShowListing}
 
+          <FormattedMessage id="Languages:" />
           <FieldCheckboxGroup
             className={css.features}
             id={name}
             name={name}
-            options={config.custom.typeOfJob} //////////////
+            options={config.custom.languages}
+          />
+
+          <FormattedMessage id="Qualifications:" />
+          <FieldCheckboxGroup
+            className={css.features}
+            id={name}
+            name={name}
+            options={config.custom.qualifications}
+          />
+
+          <FormattedMessage id="Own Insurance:" />
+          <FieldCheckboxGroup
+            className={css.features}
+            id={name}
+            name={name}
+            options={config.custom.ownInsurance}
+          />
+
+          <FormattedMessage id="Extras:" />
+          <FieldCheckboxGroup
+            className={css.features}
+            id={name}
+            name={name}
+            options={config.custom.extras}
           />
 
           <Button

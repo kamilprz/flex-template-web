@@ -38,7 +38,7 @@ const EditNoticeboardListingMinderDetailsPanel = props => {
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="Minder details:" />
+    <FormattedMessage id="What would you like to see in a minder?" />
   );
 
   const filters = publicData && publicData.categories;

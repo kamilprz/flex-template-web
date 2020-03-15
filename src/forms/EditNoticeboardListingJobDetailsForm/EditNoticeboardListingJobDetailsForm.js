@@ -53,11 +53,44 @@ const EditNoticeboardListingJobDetailsFormComponent = props => (
           {errorMessage}
           {errorMessageShowListing}
 
+          <FormattedMessage id="Select the type of job:" />
           <FieldCheckboxGroup
             className={css.features}
             id={name}
             name={name}
-            options={config.custom.typeOfJob} //////////////
+            options={config.custom.typeOfJob} 
+          />
+
+          <FormattedMessage id="Select the duration of the job:" />
+          <FieldCheckboxGroup
+            className={css.features}
+            id={name}
+            name={name}
+            options={config.custom.durationOfJob} 
+          />
+
+          <FormattedMessage id="Select the timeframe:" />
+          <FieldCheckboxGroup
+            className={css.features}
+            id={name}
+            name={name}
+            options={config.custom.timeframe} 
+          />
+
+          <FormattedMessage id="Select the location of the job:" />
+          <FieldCheckboxGroup
+            className={css.features}
+            id={name}
+            name={name}
+            options={config.custom.location} 
+          /> 
+
+          <FormattedMessage id="Select child type:" />
+          <FieldCheckboxGroup
+            className={css.features}
+            id={name}
+            name={name}
+            options={config.custom.children} 
           />
 
           <Button

@@ -95,8 +95,6 @@ export const timeframe = [
   { key: 'all', label: 'All' },
 ];
 
-// type of childcare handled by categories from above
-
 export const location = [
   { key: 'family_home', label: 'In Family\'s Home' },
   { key: 'minder_home', label: 'In Minder\'s Home' },

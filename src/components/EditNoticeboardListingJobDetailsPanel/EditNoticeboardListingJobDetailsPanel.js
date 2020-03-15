@@ -38,11 +38,11 @@ const EditNoticeboardListingJobDetailsPanel = props => {
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="Select your type of job:" />
+    <FormattedMessage id="Fill in some details about the job" />
   );
 
-  const filters = publicData && publicData.categories;
-  console.log(publicData);
+  const filters = publicData && publicData.jobDetails;
+ 
   const initialValues = { filters };
 
   return (
