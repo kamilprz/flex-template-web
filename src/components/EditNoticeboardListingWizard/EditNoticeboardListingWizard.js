@@ -21,6 +21,8 @@ import EditNoticeboardListingWizardTab, {
   DESCRIPTION,
   JOB_DETAILS,
   MINDER_DETAILS,
+  LOCATION,
+  PRICING,
   PHOTOS,
 } from './EditNoticeboardListingWizardTab';
 import css from './EditNoticeboardListingWizard.css';
@@ -33,6 +35,8 @@ export const TABS = [
   DESCRIPTION,
   JOB_DETAILS,
   MINDER_DETAILS,
+  LOCATION,
+  PRICING,
   PHOTOS,
 ];
 
@@ -43,10 +47,14 @@ const tabLabel = (intl, tab) => {
   let key = null;
   if (tab === DESCRIPTION) {
     key = 'Description';
-  } else if (tab === JOB_DETAILS) {  ////
+  } else if (tab === JOB_DETAILS) {  
     key = 'Job Details';
-  } else if (tab === MINDER_DETAILS) {  ////
+  } else if (tab === MINDER_DETAILS) {  
     key = 'Minder Details';
+  } else if (tab === LOCATION) {
+    key = 'Location';
+  } else if (tab === PRICING) {
+    key = 'Pricing';
   } else if (tab === PHOTOS) {
     key = 'Photos';
   }
@@ -65,6 +73,8 @@ const tabLabel = (intl, tab) => {
 const tabCompleted = (tab, listing) => {
   const {
     description,
+    geolocation,
+    price,
     title,
     publicData,
   } = listing.attributes;
@@ -77,6 +87,10 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData && publicData.jobDetails);
     case MINDER_DETAILS:
       return !!(publicData && publicData.minderDetails);
+    case LOCATION:
+      return !!(geolocation && publicData && publicData.location && publicData.location.address);
+    case PRICING:
+      return !!price;
     case PHOTOS:
       return images && images.length > 0;
     default:

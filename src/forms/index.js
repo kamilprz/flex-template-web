@@ -12,6 +12,8 @@ export { default as EditListingPricingForm } from './EditListingPricingForm/Edit
 export { default as EditNoticeboardListingDescriptionForm } from './EditNoticeboardListingDescriptionForm/EditNoticeboardListingDescriptionForm';
 export { default as EditNoticeboardListingJobDetailsForm } from './EditNoticeboardListingJobDetailsForm/EditNoticeboardListingJobDetailsForm';
 export { default as EditNoticeboardListingMinderDetailsForm } from './EditNoticeboardListingMinderDetailsForm/EditNoticeboardListingMinderDetailsForm';
+export { default as EditNoticeboardListingLocationForm } from './EditNoticeboardListingLocationForm/EditNoticeboardListingLocationForm';
+export { default as EditNoticeboardListingPricingForm } from './EditNoticeboardListingPricingForm/EditNoticeboardListingPricingForm';
 export { default as EditNoticeboardListingPhotosForm } from './EditNoticeboardListingPhotosForm/EditNoticeboardListingPhotosForm';
 
 export { default as EmailVerificationForm } from './EmailVerificationForm/EmailVerificationForm';

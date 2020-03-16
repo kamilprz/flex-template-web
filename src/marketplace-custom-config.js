@@ -132,6 +132,6 @@ export const qualifications = [
 ];
 
 export const ownInsurance = [
-  { key: 'yes', label: 'Yes'},
-  { key: 'no', label: 'No' },
+  { key: 'own_insurance', label: 'Yes'},
+  { key: 'not_own_insurance', label: 'No' },
 ];

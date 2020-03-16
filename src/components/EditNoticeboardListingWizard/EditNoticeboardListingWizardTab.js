@@ -13,6 +13,8 @@ import {
   EditNoticeboardListingDescriptionPanel,
   EditNoticeboardListingJobDetailsPanel,
   EditNoticeboardListingMinderDetailsPanel,
+  EditNoticeboardListingLocationPanel,
+  EditNoticeboardListingPricingPanel,
   EditNoticeboardListingPhotosPanel,
 } from '../../components';
 
@@ -21,6 +23,8 @@ import css from './EditNoticeboardListingWizard.css';
 export const DESCRIPTION = 'description';
 export const JOB_DETAILS = 'jobDetails';
 export const MINDER_DETAILS = 'minderDetails';
+export const LOCATION = 'location';
+export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
 
 // EditListingWizardTab component supports these tabs
@@ -28,6 +32,8 @@ export const SUPPORTED_TABS = [
   DESCRIPTION,
   JOB_DETAILS,
   MINDER_DETAILS,
+  LOCATION,
+  PRICING,
   PHOTOS,
 ];
 
@@ -177,11 +183,39 @@ const EditNoticeboardListingWizardTab = props => {
     }
     case MINDER_DETAILS: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'Next:Photos'
+        ? 'Next:Location'
         : 'EditNoticeboardListingWizard.saveEditMinderDetails';
       return (
         <EditNoticeboardListingMinderDetailsPanel
           {...panelProps(MINDER_DETAILS)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+    case LOCATION: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'Next:Pricing'
+        : 'EditNoticeboardListingWizard.saveEditLocation';
+      return (
+        <EditNoticeboardListingLocationPanel
+          {...panelProps(LOCATION)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+    case PRICING: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'Next:Photos'
+        : 'EditNoticeboardListingWizard.saveEditPricing';
+      return (
+        <EditNoticeboardListingPricingPanel
+          {...panelProps(PRICING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
