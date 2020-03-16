@@ -69,6 +69,7 @@ const routeConfiguration = () => {
       path: '/noticeboard',
       name: 'NoticeboardPage',
       component: props => <NoticeboardPage {...props} />,
+      loadData: NoticeboardPage.loadData,
     },
     {
       path: '/n/new',
