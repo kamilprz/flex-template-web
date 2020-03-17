@@ -51,7 +51,7 @@ const EditNoticeboardListingDescriptionPanel = props => {
           const updateValues = {
             title: title.trim(),
             description,
-            publicData: { category },
+            publicData: { category, listingType: 'noticeboard'}
           };
 
           onSubmit(updateValues);

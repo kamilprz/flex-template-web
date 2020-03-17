@@ -77,14 +77,14 @@ export const typeOfJob = [
   { key: 'flexible', label: 'Flexible' },
   { key: 'part_time', label: 'Part Time' },
   { key: 'full_time', label: 'Full Time' },
-  { key: 'all', label: 'All' },
+  { key: 'all_types', label: 'All' },
 ];
 
 export const durationOfJob = [
   { key: 'short', label: 'Short Term' },
   { key: 'medium', label: 'Medium Term' },
   { key: 'long', label: 'Long Term' },
-  { key: 'all', label: 'All' },
+  { key: 'all_durations', label: 'All' },
 ];
 
 export const timeframe = [
@@ -92,7 +92,7 @@ export const timeframe = [
   { key: 'immediate', label: 'Immediate Start' },
   { key: 'in3months', label: 'Start in the next 3 months' },
   { key: 'other', label: 'Other' },
-  { key: 'all', label: 'All' },
+  { key: 'all_timeframes', label: 'All' },
 ];
 
 export const location = [
