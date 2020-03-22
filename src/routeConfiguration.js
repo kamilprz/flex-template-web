@@ -11,6 +11,7 @@ import {
   LandingPage,
   ListingPage,
   ManageListingsPage,
+  ManageNoticeboardListingsPage,
   NotFoundPage,
   NoticeboardPage,
   PartnersPage,
@@ -266,6 +267,14 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <ManageListingsPage {...props} />,
       loadData: ManageListingsPage.loadData,
+    },
+    {
+      path: '/noticeboardlistings',
+      name: 'ManageNoticeboardListingsPage',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <ManageNoticeboardListingsPage {...props} />,
+      loadData: ManageNoticeboardListingsPage.loadData,
     },
     {
       path: '/account',
