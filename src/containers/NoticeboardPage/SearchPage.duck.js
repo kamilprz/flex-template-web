@@ -159,6 +159,8 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     ...priceMaybe,
     ...datesMaybe,
     per_page: perPage,
+    // this determines which listings are retrieved
+    pub_listingType:'noticeboard',
   };
 
   return sdk.listings

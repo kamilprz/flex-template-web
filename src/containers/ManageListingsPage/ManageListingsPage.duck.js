@@ -217,6 +217,7 @@ export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
   dispatch(queryListingsRequest(queryParams));
 
   const { perPage, ...rest } = queryParams;
+  // const params = { ...rest, per_page: perPage, pub_listingType:'noticeboard' };
   const params = { ...rest, per_page: perPage };
 
   return sdk.ownListings
