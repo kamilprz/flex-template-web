@@ -15,8 +15,17 @@ const UserNav = props => {
     {
       text: <FormattedMessage id="ManageListingsPage.yourListings" />,
       selected: selectedPageName === 'ManageListingsPage',
+      
       linkProps: {
         name: 'ManageListingsPage',
+      },
+    },
+    {
+      text: <FormattedMessage id="Your Noticeboard listings" />,
+      selected: selectedPageName === 'ManageNoticeboardListingsPage',
+
+      linkProps: {
+        name: 'ManageNoticeboardListingsPage',
       },
     },
     {

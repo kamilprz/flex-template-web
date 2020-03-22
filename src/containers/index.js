@@ -26,3 +26,4 @@ export { default as TransactionPage } from './TransactionPage/TransactionPage';
 export { default as PartnersPage } from './PartnersPage/PartnersPage';
 export { default as NoticeboardPage } from './NoticeboardPage/NoticeboardPage';
 export { default as EditNoticeboardListingPage } from './EditNoticeboardListingPage/EditNoticeboardListingPage';
+export { default as ManageNoticeboardListingsPage } from './ManageNoticeboardListingsPage/ManageNoticeboardListingsPage';

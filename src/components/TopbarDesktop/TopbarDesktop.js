@@ -88,6 +88,15 @@ const TopbarDesktop = props => {
             <FormattedMessage id="TopbarDesktop.yourListingsLink" />
           </NamedLink>
         </MenuItem>
+        <MenuItem key="ManageNoticeboardListingsPage">
+          <NamedLink
+            className={classNames(css.yourNoticeboardListingsLink, currentPageClass('ManageNoticeboardListingsPage'))}
+            name="ManageNoticeboardListingsPage"
+          >
+            <span className={css.menuItemBorder} />
+            <FormattedMessage id="Your Noticeboard Listings" />
+          </NamedLink>
+        </MenuItem>
         <MenuItem key="ProfileSettingsPage">
           <NamedLink
             className={classNames(css.profileSettingsLink, currentPageClass('ProfileSettingsPage'))}
