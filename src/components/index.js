@@ -125,7 +125,9 @@ export { default as FilterPlain } from './FilterPlain/FilterPlain';
 export { default as FilterPopup } from './FilterPopup/FilterPopup';
 export { default as KeywordFilter } from './KeywordFilter/KeywordFilter';
 export { default as ListingCard } from './ListingCard/ListingCard';
+export { default as NoticeboardListingCard } from './NoticeboardListingCard/NoticeboardListingCard';
 export { default as ManageListingCard } from './ManageListingCard/ManageListingCard';
+export { default as ManageNoticeboardListingCard } from './ManageNoticeboardListingCard/ManageNoticeboardListingCard';
 export { default as Map } from './Map/Map';
 export { default as OrderDiscussionPanel } from './OrderDiscussionPanel/OrderDiscussionPanel';
 export { default as Page } from './Page/Page';
@@ -140,6 +142,7 @@ export { default as SearchMapGroupLabel } from './SearchMapGroupLabel/SearchMapG
 export { default as SearchMapInfoCard } from './SearchMapInfoCard/SearchMapInfoCard';
 export { default as SearchMapPriceLabel } from './SearchMapPriceLabel/SearchMapPriceLabel';
 export { default as SearchResultsPanel } from './SearchResultsPanel/SearchResultsPanel';
+export { default as NoticeboardSearchResultsPanel } from './NoticeboardSearchResultsPanel/NoticeboardSearchResultsPanel';
 export { default as SelectMultipleFilter } from './SelectMultipleFilter/SelectMultipleFilter';
 export { default as SelectSingleFilter } from './SelectSingleFilter/SelectSingleFilter';
 export { default as StripeConnectAccountStatusBox } from './StripeConnectAccountStatusBox/StripeConnectAccountStatusBox';

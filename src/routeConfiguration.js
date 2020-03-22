@@ -10,6 +10,7 @@ import {
   InboxPage,
   LandingPage,
   ListingPage,
+  NoticeboardListingPage,
   ManageListingsPage,
   ManageNoticeboardListingsPage,
   NotFoundPage,
@@ -133,6 +134,12 @@ const routeConfiguration = () => {
       loadData: ListingPage.loadData,
     },
     {
+      path: '/n/:slug/:id',
+      name: 'NoticeboardListingPage',
+      component: props => <NoticeboardListingPage {...props} />,
+      loadData: NoticeboardListingPage.loadData,
+    },
+    {
       path: '/l/:slug/:id/checkout',
       name: 'CheckoutPage',
       auth: true,
@@ -146,6 +153,14 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <ListingPage {...props} />,
       loadData: ListingPage.loadData,
+    },
+    {
+      path: '/n/:slug/:id/:variant',
+      name: 'NoticeboardListingPageVariant',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <NoticeboardListingPage {...props} />,
+      loadData: NoticeboardListingPage.loadData,
     },
     {
       path: '/l/new',
@@ -180,6 +195,12 @@ const routeConfiguration = () => {
       name: 'ListingPageCanonical',
       component: props => <ListingPage {...props} />,
       loadData: ListingPage.loadData,
+    },
+    {
+      path: '/n/:id',
+      name: 'NoticeboardListingPageCanonical',
+      component: props => <NoticeboardListingPage {...props} />,
+      loadData: NoticeboardListingPage.loadData,
     },
     {
       path: '/u',

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import merge from 'lodash/merge';
 import { propTypes } from '../../util/types';
 import {
-  SearchResultsPanel,
+  NoticeboardSearchResultsPanel,
   SearchFilters,
   SearchFiltersMobile,
   SearchFiltersPanel,
@@ -135,7 +135,7 @@ class MainPanel extends Component {
                 <FormattedMessage id="SearchPage.searchError" />
               </h2>
             ) : null}
-            <SearchResultsPanel
+            <NoticeboardSearchResultsPanel
               className={css.searchListingsPanel}
               listings={listings}
               pagination={listingsAreLoaded ? pagination : null}

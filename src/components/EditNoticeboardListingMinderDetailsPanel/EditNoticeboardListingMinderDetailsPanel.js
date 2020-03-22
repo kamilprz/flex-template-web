@@ -34,7 +34,7 @@ const EditNoticeboardListingMinderDetailsPanel = props => {
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditNoticeboardListingMinderDetailsPanel.title"
+      id="What would you like to see in a minder?"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (

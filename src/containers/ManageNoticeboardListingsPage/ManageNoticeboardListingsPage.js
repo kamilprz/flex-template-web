@@ -7,7 +7,7 @@ import { propTypes } from '../../util/types';
 import { parse } from '../../util/urlHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
-  ManageListingCard,
+  ManageNoticeboardListingCard,
   Page,
   PaginationLinks,
   UserNav,
@@ -134,7 +134,7 @@ export class ManageNoticeboardListingsPageComponent extends Component {
               {heading}
               <div className={css.listingCards}>
                 {listings.map(l => (
-                  <ManageListingCard
+                  <ManageNoticeboardListingCard
                     className={css.listingCard}
                     key={l.id.uuid}
                     listing={l}

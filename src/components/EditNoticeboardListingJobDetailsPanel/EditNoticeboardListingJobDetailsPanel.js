@@ -34,7 +34,7 @@ const EditNoticeboardListingJobDetailsPanel = props => {
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditNoticeboardListingJobDetailsPanel.title"
+      id="Fill in some details about the job"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
@@ -42,7 +42,7 @@ const EditNoticeboardListingJobDetailsPanel = props => {
   );
 
   const jobDetails = publicData && publicData.jobDetails;
- 
+
   const initialValues = { jobDetails };
 
   return (

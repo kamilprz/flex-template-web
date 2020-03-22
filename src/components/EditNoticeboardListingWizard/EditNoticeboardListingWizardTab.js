@@ -155,8 +155,8 @@ const EditNoticeboardListingWizardTab = props => {
   switch (tab) {
     case DESCRIPTION: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'Next:Job details'
-        : 'EditNoticeboardListingWizard.saveEditDescription';
+        ? 'Next: Job Details'
+        : 'Next: Job Details';
       return (
         <EditNoticeboardListingDescriptionPanel
           {...panelProps(DESCRIPTION)}
@@ -169,8 +169,8 @@ const EditNoticeboardListingWizardTab = props => {
     }
     case JOB_DETAILS: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'Next:Minder Details'
-        : 'EditNoticeboardListingWizard.saveEditJobDetails';
+        ? 'Next: Minder Details'
+        : 'Next: Minder Details';
       return (
         <EditNoticeboardListingJobDetailsPanel
           {...panelProps(JOB_DETAILS)}
@@ -183,8 +183,8 @@ const EditNoticeboardListingWizardTab = props => {
     }
     case MINDER_DETAILS: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'Next:Location'
-        : 'EditNoticeboardListingWizard.saveEditMinderDetails';
+        ? 'Next: Location'
+        : 'Next: Location';
       return (
         <EditNoticeboardListingMinderDetailsPanel
           {...panelProps(MINDER_DETAILS)}
@@ -197,8 +197,8 @@ const EditNoticeboardListingWizardTab = props => {
     }
     case LOCATION: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'Next:Pricing'
-        : 'EditNoticeboardListingWizard.saveEditLocation';
+        ? 'Next: Pricing'
+        : 'Next: Pricing';
       return (
         <EditNoticeboardListingLocationPanel
           {...panelProps(LOCATION)}
@@ -211,8 +211,8 @@ const EditNoticeboardListingWizardTab = props => {
     }
     case PRICING: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'Next:Photos'
-        : 'EditNoticeboardListingWizard.saveEditPricing';
+        ? 'Next: Photos'
+        : 'Next: Photos';
       return (
         <EditNoticeboardListingPricingPanel
           {...panelProps(PRICING)}
@@ -226,7 +226,7 @@ const EditNoticeboardListingWizardTab = props => {
     case PHOTOS: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'Publish ad'
-        : 'EditNoticeboardListingWizard.saveEditPhotos';
+        : 'Publish ad';
 
       return (
         <EditNoticeboardListingPhotosPanel
