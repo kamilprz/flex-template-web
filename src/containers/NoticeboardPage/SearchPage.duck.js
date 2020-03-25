@@ -188,6 +188,7 @@ export const searchMapListings = searchParams => (dispatch, getState, sdk) => {
   const params = {
     ...rest,
     per_page: perPage,
+    pub_listingType:'noticeboard',
   };
 
   return sdk.listings
