@@ -6,7 +6,7 @@ import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { parse } from '../../util/urlHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { types as sdkTypes } from '../../util/sdkLoader';
+// import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   ManageNoticeboardListingCard,
   Page,
@@ -32,7 +32,7 @@ import css from './ManageListingsPage.css';
 // Current design has max 3 columns 42 is divisible by 2 and 3
 // So, there's enough cards to fill all columns on full pagination pages
 const RESULT_PAGE_SIZE = 42;
-const { UUID } = sdkTypes;
+// const { UUID } = sdkTypes;
 
 export class ManageNoticeboardListingsPageComponent extends Component {
   constructor(props) {
@@ -244,10 +244,11 @@ const ManageNoticeboardListingsPage = compose(
 ManageNoticeboardListingsPage.loadData = (params, search) => {
   const queryParams = parse(search);
   const page = queryParams.page || 1;
-  const id = new UUID(params.id);
+  // const id = new UUID(params.id);
+
   return queryOwnListings({
     ...queryParams,
-    userID: id, 
+    // userID: id, 
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['images'],

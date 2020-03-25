@@ -216,8 +216,14 @@ export const queryListingsError = e => ({
 export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
   dispatch(queryListingsRequest(queryParams));
 
-  const { perPage, ...rest } = queryParams;
-  const params = { ...rest, per_page: perPage };
+  // const { userID, perPage, ...rest } = queryParams;
+  const {perPage, ...rest } = queryParams;
+  const params = {
+      ...rest, 
+      // authorId: userID, 
+      per_page: perPage,
+      pub_listingType:'listing'
+    };
 
   return sdk.ownListings
     .query(params)

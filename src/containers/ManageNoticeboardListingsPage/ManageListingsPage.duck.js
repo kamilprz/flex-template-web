@@ -216,15 +216,16 @@ export const queryListingsError = e => ({
 export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
   dispatch(queryListingsRequest(queryParams));
 
-  const { userId, perPage, ...rest } = queryParams;
+  // const { userID, perPage, ...rest } = queryParams;
+  const {perPage, ...rest } = queryParams;
   const params = { 
     ...rest,
-    author_id: userId, 
+    // authorId: userID, 
     per_page: perPage, 
     pub_listingType:'noticeboard' 
   };
 
-  return sdk.listings
+  return sdk.ownListings
     .query(params)
     .then(response => {
       dispatch(addOwnEntities(response));
