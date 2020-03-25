@@ -108,7 +108,7 @@ export const EditNoticeboardListingPageComponent = props => {
 
     const redirectProps = isPendingApproval
       ? {
-          name: 'ListingPageVariant',
+          name: 'NoticeboardListingPageVariant',
           params: {
             id: listingId.uuid,
             slug: listingSlug,
@@ -116,7 +116,7 @@ export const EditNoticeboardListingPageComponent = props => {
           },
         }
       : {
-          name: 'ListingPage',
+          name: 'NoticeboardListingPage',
           params: {
             id: listingId.uuid,
             slug: listingSlug,
