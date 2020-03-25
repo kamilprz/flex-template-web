@@ -47,17 +47,12 @@ const EditNoticeboardListingDescriptionFormComponent = props => (
       );
 
       const descriptionMessage = intl.formatMessage({
-        id: 'Tell us about your family and your child',
+        id: 'Tell us about your family and your child and the job description',
       });
       const descriptionPlaceholderMessage = intl.formatMessage({
-        id: 'What is the age of your child? How many children do you have?',
+        id: 'What is the age of your child? How many children do you have? Describe the job details',
       });
-      const jobDescriptionMessage = intl.formatMessage({
-        id: 'Job Description',
-      });
-      const jobDescriptionPlaceholderMessage = intl.formatMessage({
-        id: 'Describe the details of the job',
-      });
+
       const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
       const descriptionRequiredMessage = intl.formatMessage({
         id: 'A description is required',
@@ -122,15 +117,6 @@ const EditNoticeboardListingDescriptionFormComponent = props => (
             intl={intl}
           />
 
-          <FieldTextInput
-            id="jobdescription"
-            name="jobdescription"
-            className={css.description}
-            type="textarea"
-            label={jobDescriptionMessage}
-            placeholder={jobDescriptionPlaceholderMessage}
-            validate={composeValidators(required(descriptionRequiredMessage))}
-          />
 
           <Button
             className={css.submitButton}

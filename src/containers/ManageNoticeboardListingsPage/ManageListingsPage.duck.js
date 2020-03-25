@@ -217,11 +217,11 @@ export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
   dispatch(queryListingsRequest(queryParams));
 
   const { userId, perPage, ...rest } = queryParams;
-  const params = { 
+  const params = {
     ...rest,
-    author_id: userId, 
-    per_page: perPage, 
-    pub_listingType:'noticeboard' 
+    author_id: userId,
+    per_page: perPage,
+    pub_listingType:'noticeboard'
   };
 
   return sdk.listings

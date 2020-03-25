@@ -247,7 +247,7 @@ ManageNoticeboardListingsPage.loadData = (params, search) => {
   const id = new UUID(params.id);
   return queryOwnListings({
     ...queryParams,
-    userID: id, 
+    userID: id,
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['images'],
