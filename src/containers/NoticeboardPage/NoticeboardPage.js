@@ -56,7 +56,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     }
 
     filters() {
-      const { categories, filters, priceFilterConfig, dateRangeFilterConfig } = this.props;
+      const { categories, typeOfJob, priceFilterConfig, dateRangeFilterConfig } = this.props;
 
       // Note: "category" and "filters" filters are not actually filtering anything by default.
       // Currently, if you want to use them, we need to manually configure them to be available
@@ -68,9 +68,9 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
           paramName: 'pub_category',
           options: categories,
         },
-        filtersFilter: {
-          paramName: 'pub_filters',
-          options: filters,
+        typeOfJobFilter: {
+          paramName: 'pub_typeOfJob',
+          options: typeOfJob,
         },
         priceFilter: {
           paramName: 'price',
@@ -224,7 +224,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
               showAsModalMaxWidth={MODAL_BREAKPOINT}
               primaryFilters={{
                 categoryFilter: filters.categoryFilter,
-                filtersFilter: filters.filtersFilter,
+                typeOfJobFilter: filters.typeOfJobFilter,
                 priceFilter: filters.priceFilter,
                 dateRangeFilter: filters.dateRangeFilter
               }}
@@ -271,7 +271,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     searchParams: {},
     tab: 'listings',
     categories: config.custom.categories,
-    filters: config.custom.filters,
+    typeOfJob: config.custom.typeOfJob,
     priceFilterConfig: config.custom.priceFilterConfig,
     dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
     activeListingId: null,
@@ -290,7 +290,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     searchParams: object,
     tab: oneOf(['filters', 'listings', 'map']).isRequired,
     categories: array,
-    filters: array,
+    typeOfJob: array,
     priceFilterConfig: shape({
       min: number.isRequired,
       max: number.isRequired,

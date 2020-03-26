@@ -136,6 +136,8 @@ export { default as Reviews } from './Reviews/Reviews';
 export { default as SavedCardDetails } from './SavedCardDetails/SavedCardDetails';
 export { default as SearchFilters } from './SearchFilters/SearchFilters';
 export { default as SearchFiltersMobile } from './SearchFiltersMobile/SearchFiltersMobile';
+export { default as SearchFiltersNoticeboard } from './SearchFiltersNoticeboard/SearchFiltersNoticeboard';
+export { default as SearchFiltersNoticeboardMobile } from './SearchFiltersNoticeboardMobile/SearchFiltersNoticeboardMobile';
 export { default as SearchFiltersPanel } from './SearchFiltersPanel/SearchFiltersPanel';
 export { default as SearchMap } from './SearchMap/SearchMap';
 export { default as SearchMapGroupLabel } from './SearchMapGroupLabel/SearchMapGroupLabel';

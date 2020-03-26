@@ -15,13 +15,13 @@ import {
   SelectSingleFilter,
   SelectMultipleFilter,
   BookingDateRangeFilter,
-} from '../../components';
+} from '..';
 import { propTypes } from '../../util/types';
-import css from './SearchFiltersMobile.css';
+import css from './SearchFiltersNoticeboardMobile.css';
 
 const RADIX = 10;
 
-class SearchFiltersMobileComponent extends Component {
+class SearchFiltersNoticeboardMobileComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { isFiltersOpenOnMobile: false, initialQueryParams: null };
@@ -317,7 +317,7 @@ class SearchFiltersMobileComponent extends Component {
   }
 }
 
-SearchFiltersMobileComponent.defaultProps = {
+SearchFiltersNoticeboardMobileComponent.defaultProps = {
   rootClassName: null,
   className: null,
   resultsCount: null,
@@ -325,12 +325,12 @@ SearchFiltersMobileComponent.defaultProps = {
   selectedFiltersCount: 0,
   filterParamNames: [],
   categoryFilter: null,
-  filtersFilter: null,
+  typeOfJobFilter: null,
   priceFilter: null,
   dateRangeFilter: null,
 };
 
-SearchFiltersMobileComponent.propTypes = {
+SearchFiltersNoticeboardMobileComponent.propTypes = {
   rootClassName: string,
   className: string,
   urlQueryParams: object.isRequired,
@@ -345,7 +345,7 @@ SearchFiltersMobileComponent.propTypes = {
   selectedFiltersCount: number,
   filterParamNames: array,
   categoriesFilter: propTypes.filterConfig,
-  filtersFilter: propTypes.filterConfig,
+  typeOfJobFilter: propTypes.filterConfig,
   priceFilter: propTypes.filterConfig,
   dateRangeFilter: propTypes.filterConfig,
 
@@ -358,6 +358,6 @@ SearchFiltersMobileComponent.propTypes = {
   }).isRequired,
 };
 
-const SearchFiltersMobile = injectIntl(withRouter(SearchFiltersMobileComponent));
+const SearchFiltersNoticeboardMobile = injectIntl(withRouter(SearchFiltersNoticeboardMobileComponent));
 
-export default SearchFiltersMobile;
+export default SearchFiltersNoticeboardMobile;

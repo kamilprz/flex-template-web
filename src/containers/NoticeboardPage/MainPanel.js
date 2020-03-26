@@ -6,7 +6,8 @@ import merge from 'lodash/merge';
 import { propTypes } from '../../util/types';
 import {
   NoticeboardSearchResultsPanel,
-  SearchFilters,
+  SearchFiltersNoticeboard,
+  SearchFiltersNoticeboardMobile,
   SearchFiltersMobile,
   SearchFiltersPanel,
   NamedLink,
@@ -86,8 +87,8 @@ class MainPanel extends Component {
           <FormattedMessage id="Place an Ad Now" />
           </NamedLink>
       </div>
-        <SearchFilters
-          className={css.searchFilters}
+        <SearchFiltersNoticeboard
+          className={css.searchFiltersNoticeboard}
           urlQueryParams={urlQueryParams}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
