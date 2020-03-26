@@ -108,7 +108,8 @@ export const children = [
   { key: 'special_needs', label: 'Special Needs' },
 ];
 
-export const languages = [
+// export const languages = [
+export const amenities = [
   { key: 'english', label: 'English' },
   { key: 'spanish', label: 'Spanish' },
   { key: 'french', label: 'French' },

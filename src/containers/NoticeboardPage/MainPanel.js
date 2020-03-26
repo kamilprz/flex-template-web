@@ -8,7 +8,6 @@ import {
   NoticeboardSearchResultsPanel,
   SearchFiltersNoticeboard,
   SearchFiltersNoticeboardMobile,
-  SearchFiltersMobile,
   SearchFiltersPanel,
   NamedLink,
 } from '../../components';
@@ -88,7 +87,7 @@ class MainPanel extends Component {
           </NamedLink>
       </div>
         <SearchFiltersNoticeboard
-          className={css.searchFiltersNoticeboard}
+          className={css.searchFilters}
           urlQueryParams={urlQueryParams}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
@@ -98,7 +97,7 @@ class MainPanel extends Component {
           {...searchFiltersPanelProps}
           {...primaryFilters}
         />
-        <SearchFiltersMobile
+        <SearchFiltersNoticeboardMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
           listingsAreLoaded={listingsAreLoaded}

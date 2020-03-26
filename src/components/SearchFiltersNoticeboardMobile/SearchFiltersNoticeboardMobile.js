@@ -15,13 +15,13 @@ import {
   SelectSingleFilter,
   SelectMultipleFilter,
   BookingDateRangeFilter,
-} from '..';
+} from '../../components';
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersNoticeboardMobile.css';
 
 const RADIX = 10;
 
-class SearchFiltersNoticeboardMobileComponent extends Component {
+class SearchFiltersMobileComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { isFiltersOpenOnMobile: false, initialQueryParams: null };
@@ -317,7 +317,7 @@ class SearchFiltersNoticeboardMobileComponent extends Component {
   }
 }
 
-SearchFiltersNoticeboardMobileComponent.defaultProps = {
+SearchFiltersMobileComponent.defaultProps = {
   rootClassName: null,
   className: null,
   resultsCount: null,
@@ -330,7 +330,7 @@ SearchFiltersNoticeboardMobileComponent.defaultProps = {
   dateRangeFilter: null,
 };
 
-SearchFiltersNoticeboardMobileComponent.propTypes = {
+SearchFiltersMobileComponent.propTypes = {
   rootClassName: string,
   className: string,
   urlQueryParams: object.isRequired,
@@ -358,6 +358,6 @@ SearchFiltersNoticeboardMobileComponent.propTypes = {
   }).isRequired,
 };
 
-const SearchFiltersNoticeboardMobile = injectIntl(withRouter(SearchFiltersNoticeboardMobileComponent));
+const SearchFiltersMobile = injectIntl(withRouter(SearchFiltersMobileComponent));
 
-export default SearchFiltersNoticeboardMobile;
+export default SearchFiltersMobile;

@@ -182,7 +182,7 @@ class SearchFiltersMobileComponent extends Component {
       onManageDisableScrolling,
       selectedFiltersCount,
       categoryFilter,
-      typeOfJobFilter,
+      filtersFilter,
       priceFilter,
       dateRangeFilter,
       intl,
@@ -225,17 +225,17 @@ class SearchFiltersMobileComponent extends Component {
 
     const filtersLabel = intl.formatMessage({ id: 'SearchFiltersMobile.filtersLabel' });
 
-    const initialFilters = this.initialValues(typeOfJobFilter.paramName);
+    const initialFilters = this.initialValues(filtersFilter.paramName);
 
-    const typeOfJobFilterElement = typeOfJobFilter ? (
+    const filtersFilterElement = filtersFilter ? (
       <SelectMultipleFilter
-        id="SearchFiltersMobile.typeOfJobFilter"
+        id="SearchFiltersMobile.filtersFilter"
         name="filters"
-        urlParam={typeOfJobFilter.paramName}
+        urlParam={filtersFilter.paramName}
         label={filtersLabel}
         onSubmit={this.handleSelectMultiple}
         liveEdit
-        options={typeOfJobFilter.options}
+        options={filtersFilter.options}
         initialValues={initialFilters}
       />
     ) : null;
@@ -300,7 +300,7 @@ class SearchFiltersMobileComponent extends Component {
           {this.state.isFiltersOpenOnMobile ? (
             <div className={css.filtersWrapper}>
               {categoryFilterElement}
-              {typeOfJobFilterElement}
+              {filtersFilterElement}
               {priceFilterElement}
               {dateRangeFilterElement}
             </div>

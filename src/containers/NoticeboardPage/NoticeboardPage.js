@@ -56,7 +56,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     }
 
     filters() {
-      const { categories, typeOfJob, priceFilterConfig, dateRangeFilterConfig } = this.props;
+      const { categories, amenities, typeOfJob, priceFilterConfig, dateRangeFilterConfig} = this.props;
 
       // Note: "category" and "filters" filters are not actually filtering anything by default.
       // Currently, if you want to use them, we need to manually configure them to be available
@@ -67,6 +67,10 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
         categoryFilter: {
           paramName: 'pub_category',
           options: categories,
+        },
+        amenitiesFilter: {
+          paramName: 'pub_amenities',
+          options: amenities,
         },
         typeOfJobFilter: {
           paramName: 'pub_typeOfJob',
@@ -205,8 +209,6 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
             currentSearchParams={urlQueryParams}
           />
 
-          
-
           <div className={css.container}>
             <MainPanel
               urlQueryParams={validQueryParams}
@@ -223,10 +225,14 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
               searchParamsForPagination={parse(location.search)}
               showAsModalMaxWidth={MODAL_BREAKPOINT}
               primaryFilters={{
-                categoryFilter: filters.categoryFilter,
+                // categoryFilter: filters.categoryFilter,
                 typeOfJobFilter: filters.typeOfJobFilter,
                 priceFilter: filters.priceFilter,
                 dateRangeFilter: filters.dateRangeFilter
+              }}
+              secondaryFilters={{
+                categoryFilter: filters.categoryFilter,
+                amenitiesFilter: filters.amenitiesFilter,
               }}
             />
             <ModalInMobile
@@ -271,6 +277,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     searchParams: {},
     tab: 'listings',
     categories: config.custom.categories,
+    amenities: config.custom.amenities,
     typeOfJob: config.custom.typeOfJob,
     priceFilterConfig: config.custom.priceFilterConfig,
     dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
@@ -290,6 +297,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     searchParams: object,
     tab: oneOf(['filters', 'listings', 'map']).isRequired,
     categories: array,
+    amenities: array,
     typeOfJob: array,
     priceFilterConfig: shape({
       min: number.isRequired,
