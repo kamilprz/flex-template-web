@@ -56,21 +56,15 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     }
 
     filters() {
-      const { categories, amenities, typeOfJob, priceFilterConfig, dateRangeFilterConfig} = this.props;
-
-      // Note: "category" and "filters" filters are not actually filtering anything by default.
-      // Currently, if you want to use them, we need to manually configure them to be available
-      // for search queries. Read more from extended data document:
-      // https://www.sharetribe.com/docs/references/extended-data/#data-schema
+      const {  
+              categories, typeOfJob, priceFilterConfig, dateRangeFilterConfig, 
+              duration, jobLocation, languages, extras, qualifications, insurance,
+            } = this.props;
 
       return {
         categoryFilter: {
           paramName: 'pub_category',
           options: categories,
-        },
-        amenitiesFilter: {
-          paramName: 'pub_amenities',
-          options: amenities,
         },
         typeOfJobFilter: {
           paramName: 'pub_typeOfJob',
@@ -83,6 +77,31 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
         dateRangeFilter: {
           paramName: 'dates',
           config: dateRangeFilterConfig,
+        },
+
+        durationFilter: {
+          paramName: 'pub_durationOfJob',
+          options: duration,
+        },
+        locationFilter: {
+          paramName: 'pub_jobLocation',
+          options: jobLocation,
+        },
+        languagesFilter: {
+          paramName: 'pub_languages',
+          options: languages,
+        },
+        extrasFilter: {
+          paramName: 'pub_extras',
+          options: extras,
+        },
+        qualificationsFilter: {
+          paramName: 'pub_qualifications',
+          options: qualifications,
+        },
+        insuranceFilter: {
+          paramName: 'pub_insurance',
+          options: insurance,
         },
       };
     }
@@ -225,14 +244,18 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
               searchParamsForPagination={parse(location.search)}
               showAsModalMaxWidth={MODAL_BREAKPOINT}
               primaryFilters={{
-                // categoryFilter: filters.categoryFilter,
+                categoryFilter: filters.categoryFilter,
                 typeOfJobFilter: filters.typeOfJobFilter,
                 priceFilter: filters.priceFilter,
                 dateRangeFilter: filters.dateRangeFilter
               }}
               secondaryFilters={{
-                categoryFilter: filters.categoryFilter,
-                amenitiesFilter: filters.amenitiesFilter,
+                durationFilter: filters.durationFilter,
+                locationFilter: filters.locationFilter,
+                languagesFilter: filters.languagesFilter,
+                extrasFilter: filters.extrasFilter,
+                qualificationsFilter: filters.qualificationsFilter,
+                insuranceFilter: filters.insuranceFilter
               }}
             />
             <ModalInMobile
@@ -277,10 +300,17 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     searchParams: {},
     tab: 'listings',
     categories: config.custom.categories,
-    amenities: config.custom.amenities,
     typeOfJob: config.custom.typeOfJob,
     priceFilterConfig: config.custom.priceFilterConfig,
     dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
+
+    duration: config.custom.durationOfJob,
+    jobLocation: config.custom.jobLocation,
+    languages: config.custom.languages,
+    extras: config.custom.extras,
+    qualifications: config.custom.qualifications,
+    insurance: config.custom.ownInsurance,
+
     activeListingId: null,
   };
 
@@ -305,6 +335,12 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
       step: number.isRequired,
     }),
     dateRangeFilterConfig: shape({ active: bool.isRequired }),
+    duration: array,
+    jobLocation: array,
+    languages: array,
+    extras: array,
+    qualifications: array,
+    insurance: array,
 
     // from withRouter
     history: shape({

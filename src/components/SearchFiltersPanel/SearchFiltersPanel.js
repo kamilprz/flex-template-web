@@ -154,42 +154,96 @@ class SearchFiltersPanelComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, intl, categoryFilter, amenitiesFilter } = this.props;
+    const { rootClassName, className, intl, durationFilter, locationFilter, languagesFilter, extrasFilter, qualificationsFilter, insuranceFilter } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
-    const initialCategory = this.initialValue(categoryFilter.paramName);
-    const initialAmenities = this.initialValues(amenitiesFilter.paramName);
+    const initialDuration = this.initialValue(durationFilter.paramName);
+    const initialLocation = this.initialValues(locationFilter.paramName);
+    const initialLanguage = this.initialValues(languagesFilter.paramName);
+    const initialExtras = this.initialValues(extrasFilter.paramName);
+    const initialQualifications = this.initialValues(qualificationsFilter.paramName);
+    const initialInsurance = this.initialValues(insuranceFilter.paramName);
 
-    const categoryLabel = intl.formatMessage({
-      id: 'SearchFiltersPanel.categoryLabel',
-    });
-
-    const amenitiesLabel = intl.formatMessage({
-      id: 'SearchFiltersPanel.amenitiesLabel',
-    });
-
-    const categoryFilterElement = categoryFilter ? (
-      <SelectSingleFilter
-        urlParam={categoryFilter.paramName}
-        label={categoryLabel}
-        onSelect={this.handleSelectSingle}
+    const durationFilterElement = durationFilter ? (
+      <SelectMultipleFilter
+        id={'SearchFiltersPanel.durationFilter'}
+        name="duration"
+        urlParam={durationFilter.paramName}
+        label={'Duration'}
+        onSubmit={this.handleSelectMultiple}
         liveEdit
-        options={categoryFilter.options}
-        initialValue={initialCategory}
+        options={durationFilter.options}
+        initialValues={initialDuration}
         contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
       />
     ) : null;
 
-    const amenitiesFilterElement = amenitiesFilter ? (
+    const locationFilterElement = locationFilter ? (
       <SelectMultipleFilter
-        id={'SearchFiltersPanel.amenitiesFilter'}
-        name="amenities"
-        urlParam={amenitiesFilter.paramName}
-        label={amenitiesLabel}
+        id={'SearchFiltersPanel.locationFilter'}
+        name="location"
+        urlParam={locationFilter.paramName}
+        label={'Location'}
         onSubmit={this.handleSelectMultiple}
         liveEdit
-        options={amenitiesFilter.options}
-        initialValues={initialAmenities}
+        options={locationFilter.options}
+        initialValues={initialLocation}
+        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      />
+    ) : null;
+
+    const languagesFilterElement = languagesFilter ? (
+      <SelectMultipleFilter
+        id={'SearchFiltersPanel.languagesFilter'}
+        name="language"
+        urlParam={languagesFilter.paramName}
+        label={'Language'}
+        onSubmit={this.handleSelectMultiple}
+        liveEdit
+        options={languagesFilter.options}
+        initialValues={initialLanguage}
+        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      />
+    ) : null;
+
+    const extrasFilterElement = extrasFilter ? (
+      <SelectMultipleFilter
+        id={'SearchFiltersPanel.extrasFilter'}
+        name="extras"
+        urlParam={extrasFilter.paramName}
+        label={'Extras'}
+        onSubmit={this.handleSelectMultiple}
+        liveEdit
+        options={extrasFilter.options}
+        initialValues={initialExtras}
+        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      />
+    ) : null;
+
+    const qualificationsFilterElement = qualificationsFilter ? (
+      <SelectMultipleFilter
+        id={'SearchFiltersPanel.qualificationsFilter'}
+        name="qualifications"
+        urlParam={qualificationsFilter.paramName}
+        label={'Qualifications'}
+        onSubmit={this.handleSelectMultiple}
+        liveEdit
+        options={qualificationsFilter.options}
+        initialValues={initialQualifications}
+        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      />
+    ) : null;
+
+    const insuranceFilterElement = insuranceFilter ? (
+      <SelectMultipleFilter
+        id={'SearchFiltersPanel.insuranceFilter'}
+        name="insurance"
+        urlParam={insuranceFilter.paramName}
+        label={'Own Insurance'}
+        onSubmit={this.handleSelectMultiple}
+        liveEdit
+        options={insuranceFilter.options}
+        initialValues={initialInsurance}
         contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
       />
     ) : null;
@@ -197,8 +251,12 @@ class SearchFiltersPanelComponent extends Component {
     return (
       <div className={classes}>
         <div className={css.filtersWrapper}>
-          {categoryFilterElement}
-          {amenitiesFilterElement}
+          {durationFilterElement}
+          {locationFilterElement}
+          {languagesFilterElement}
+          {extrasFilterElement}
+          {qualificationsFilterElement}
+          {insuranceFilterElement}
         </div>
         <div className={css.footer}>
           <InlineTextButton rootClassName={css.resetAllButton} onClick={this.resetAll}>

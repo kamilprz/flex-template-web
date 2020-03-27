@@ -95,7 +95,7 @@ export const timeframe = [
   { key: 'all_timeframes', label: 'All' },
 ];
 
-export const location = [
+export const jobLocation = [
   { key: 'family_home', label: 'In Family\'s Home' },
   { key: 'minder_home', label: 'In Minder\'s Home' },
   { key: 'travel', label: 'Travel with Family' },
@@ -109,7 +109,7 @@ export const children = [
 ];
 
 // export const languages = [
-export const amenities = [
+export const languages = [
   { key: 'english', label: 'English' },
   { key: 'spanish', label: 'Spanish' },
   { key: 'french', label: 'French' },
