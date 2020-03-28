@@ -68,6 +68,8 @@ const SearchFiltersNoticeboardComponent = props => {
     searchInProgress,
     categoryFilter,
     typeOfJobFilter,
+    timeframeFilter,
+    typeOfChildFilter,
     priceFilter,
     dateRangeFilter,
     isSearchFiltersPanelOpen,
@@ -90,6 +92,14 @@ const SearchFiltersNoticeboardComponent = props => {
 
   const initialTypeOfJob = typeOfJobFilter
     ? initialValues(urlQueryParams, typeOfJobFilter.paramName)
+    : null;
+
+  const initialTimeframe = timeframeFilter
+    ? initialValues(urlQueryParams, timeframeFilter.paramName)
+    : null;
+
+  const initialTypeOfChild = typeOfChildFilter
+    ? initialValues(urlQueryParams, typeOfChildFilter.paramName)
     : null;
 
   const initialCategory = categoryFilter
@@ -162,13 +172,41 @@ const SearchFiltersNoticeboardComponent = props => {
   const typeOfJobFilterElement = typeOfJobFilter ? (
     <SelectMultipleFilter
       id={'SearchFilters.typeOfJobFilter'}
-      name="filters"
+      name="typeOfJob"
       urlParam={typeOfJobFilter.paramName}
-      label={filtersLabel}
+      label={'Job Type'}
       onSubmit={handleSelectOptions}
       showAsPopup
       options={typeOfJobFilter.options}
       initialValues={initialTypeOfJob}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
+  const timeframeFilterElement = timeframeFilter ? (
+    <SelectMultipleFilter
+      id={'SearchFilters.timeframeFilter'}
+      name="timeframe"
+      urlParam={timeframeFilter.paramName}
+      label={'Timeframe'}
+      onSubmit={handleSelectOptions}
+      showAsPopup
+      options={timeframeFilter.options}
+      initialValues={initialTimeframe}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
+  const typeOfChildFilterElement = typeOfChildFilter ? (
+    <SelectMultipleFilter
+      id={'SearchFilters.typeOfChildFilter'}
+      name="typeOfChild"
+      urlParam={typeOfChildFilter.paramName}
+      label={'Children'}
+      onSubmit={handleSelectOptions}
+      showAsPopup
+      options={typeOfChildFilter.options}
+      initialValues={initialTypeOfChild}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
@@ -219,6 +257,8 @@ const SearchFiltersNoticeboardComponent = props => {
       <div className={css.filters}>
         {categoryFilterElement}
         {typeOfJobFilterElement}
+        {timeframeFilterElement}
+        {typeOfChildFilterElement}
         {priceFilterElement}
         {dateRangeFilterElement}
         {toggleSearchFiltersPanelButton}
@@ -254,6 +294,8 @@ SearchFiltersNoticeboardComponent.defaultProps = {
   searchingInProgress: false,
   categoryFilter: null,
   typeOfJobFilter: null,
+  timeframeFilter: null,
+  typeOfChildFilter: null,
   priceFilter: null,
   dateRangeFilter: null,
   isSearchFiltersPanelOpen: false,
@@ -271,6 +313,8 @@ SearchFiltersNoticeboardComponent.propTypes = {
   onManageDisableScrolling: func.isRequired,
   categoriesFilter: propTypes.filterConfig,
   typeOfJobFilter: propTypes.filterConfig,
+  timeframeFilter: propTypes.filterConfig,
+  typeOfChildFilter: propTypes.filterConfig,
   priceFilter: propTypes.filterConfig,
   dateRangeFilter: propTypes.filterConfig,
   isSearchFiltersPanelOpen: bool,

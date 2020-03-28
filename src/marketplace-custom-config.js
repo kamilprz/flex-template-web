@@ -101,7 +101,7 @@ export const jobLocation = [
   { key: 'travel', label: 'Travel with Family' },
 ];
 
-export const children = [
+export const typeOfChild = [
   { key: 'new_born', label: 'New Born' },
   { key: 'toddler', label: 'Toddler' },
   { key: 'under10', label: 'Under 10' },

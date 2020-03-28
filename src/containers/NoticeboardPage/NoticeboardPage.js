@@ -57,7 +57,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
 
     filters() {
       const {  
-              categories, typeOfJob, priceFilterConfig, dateRangeFilterConfig, 
+              categories, typeOfJob, timeframe, typeOfChild,  priceFilterConfig, dateRangeFilterConfig, 
               duration, jobLocation, languages, extras, qualifications, insurance,
             } = this.props;
 
@@ -69,6 +69,14 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
         typeOfJobFilter: {
           paramName: 'pub_typeOfJob',
           options: typeOfJob,
+        },
+        typeOfChildFilter: {
+          paramName: 'pub_typeOfChild',
+          options: typeOfChild,
+        },
+        timeframeFilter: {
+          paramName: 'pub_timeframe',
+          options: timeframe,
         },
         priceFilter: {
           paramName: 'price',
@@ -246,6 +254,8 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
               primaryFilters={{
                 categoryFilter: filters.categoryFilter,
                 typeOfJobFilter: filters.typeOfJobFilter,
+                timeframeFilter: filters.timeframeFilter,
+                typeOfChildFilter: filters.typeOfChildFilter,
                 priceFilter: filters.priceFilter,
                 dateRangeFilter: filters.dateRangeFilter
               }}
@@ -301,6 +311,8 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     tab: 'listings',
     categories: config.custom.categories,
     typeOfJob: config.custom.typeOfJob,
+    timeframe: config.custom.timeframe,
+    typeOfChild: config.custom.typeOfChild,
     priceFilterConfig: config.custom.priceFilterConfig,
     dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
 
@@ -329,6 +341,8 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
     categories: array,
     amenities: array,
     typeOfJob: array,
+    timeframe: array,
+    typeOfChild: array,
     priceFilterConfig: shape({
       min: number.isRequired,
       max: number.isRequired,
