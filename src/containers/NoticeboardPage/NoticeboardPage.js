@@ -67,7 +67,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
           options: categories,
         },
         typeOfJobFilter: {
-          paramName: 'pub_typeOfJob',
+          paramName: 'pub_jobDetails',
           options: typeOfJob,
         },
         typeOfChildFilter: {
@@ -96,7 +96,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
           options: jobLocation,
         },
         languagesFilter: {
-          paramName: 'pub_languages',
+          paramName: 'pub_minderDetails',
           options: languages,
         },
         extrasFilter: {

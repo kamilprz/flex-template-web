@@ -183,6 +183,8 @@ class SearchFiltersMobileComponent extends Component {
       selectedFiltersCount,
       categoryFilter,
       typeOfJobFilter,
+      timeframeFilter,
+      typeOfChildFilter,
       priceFilter,
       dateRangeFilter,
       intl,
@@ -209,7 +211,15 @@ class SearchFiltersMobileComponent extends Component {
     const categoryLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.categoryLabel',
     });
+    
+    
     const initialCategory = categoryFilter ? this.initialValue(categoryFilter.paramName) : null;
+    const initialTypeOfJob = this.initialValue(typeOfJobFilter.paramName);
+    const initialTimeframe = this.initialValue(timeframeFilter.paramName);
+    const initialTypeOfChild = this.initialValue(typeOfChildFilter.paramName);
+    const initialPriceRange = this.initialPriceRangeValue(priceFilter.paramName);
+    const initialDateRange = this.initialDateRangeValue(dateRangeFilter.paramName);
+
 
     const categoryFilterElement = categoryFilter ? (
       <SelectSingleFilter
@@ -223,25 +233,45 @@ class SearchFiltersMobileComponent extends Component {
       />
     ) : null;
 
-    const filtersLabel = intl.formatMessage({ id: 'SearchFiltersMobile.filtersLabel' });
-
-    const initialFilters = this.initialValues(typeOfJobFilter.paramName);
-
     const typeOfJobFilterElement = typeOfJobFilter ? (
       <SelectMultipleFilter
-        id="SearchFiltersMobile.typeOfJobFilter"
-        name="filters"
+        id={'SearchFilters.typeOfJobFilter'}
+        name="typeOfJob"
         urlParam={typeOfJobFilter.paramName}
-        label={filtersLabel}
+        label={'Job Type'}
         onSubmit={this.handleSelectMultiple}
         liveEdit
         options={typeOfJobFilter.options}
-        initialValues={initialFilters}
+        initialValues={initialTypeOfJob}
       />
     ) : null;
 
-    const initialPriceRange = this.initialPriceRangeValue(priceFilter.paramName);
-
+    const timeframeFilterElement = timeframeFilter ? (
+      <SelectMultipleFilter
+        id={'SearchFilters.timeframeFilter'}
+        name="timeframe"
+        urlParam={timeframeFilter.paramName}
+        label={'Timeframe'}
+        onSubmit={this.handleSelectMultiple}
+        liveEdit
+        options={timeframeFilter.options}
+        initialValues={initialTimeframe}
+      />
+    ) : null;
+  
+    const typeOfChildFilterElement = typeOfChildFilter ? (
+      <SelectMultipleFilter
+        id={'SearchFilters.typeOfChildFilter'}
+        name="typeOfChild"
+        urlParam={typeOfChildFilter.paramName}
+        label={'Children'}
+        onSubmit={this.handleSelectMultiple}
+        liveEdit
+        options={typeOfChildFilter.options}
+        initialValues={initialTypeOfChild}
+      />
+    ) : null;
+    
     const priceFilterElement = priceFilter ? (
       <PriceFilter
         id="SearchFiltersMobile.priceFilter"
@@ -252,8 +282,6 @@ class SearchFiltersMobileComponent extends Component {
         initialValues={initialPriceRange}
       />
     ) : null;
-
-    const initialDateRange = this.initialDateRangeValue(dateRangeFilter.paramName);
 
     const dateRangeFilterElement =
       dateRangeFilter && dateRangeFilter.config.active ? (
@@ -301,6 +329,8 @@ class SearchFiltersMobileComponent extends Component {
             <div className={css.filtersWrapper}>
               {categoryFilterElement}
               {typeOfJobFilterElement}
+              {timeframeFilterElement}
+              {typeOfChildFilterElement}
               {priceFilterElement}
               {dateRangeFilterElement}
             </div>
@@ -326,6 +356,8 @@ SearchFiltersMobileComponent.defaultProps = {
   filterParamNames: [],
   categoryFilter: null,
   typeOfJobFilter: null,
+  timeframeFilter: null,
+  typeOfChildFilter: null,
   priceFilter: null,
   dateRangeFilter: null,
 };
@@ -346,6 +378,8 @@ SearchFiltersMobileComponent.propTypes = {
   filterParamNames: array,
   categoriesFilter: propTypes.filterConfig,
   typeOfJobFilter: propTypes.filterConfig,
+  timeframeFilter: propTypes.filterConfig,
+  typeOfChildFilter: propTypes.filterConfig,
   priceFilter: propTypes.filterConfig,
   dateRangeFilter: propTypes.filterConfig,
 
