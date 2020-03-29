@@ -82,7 +82,7 @@ const EditNoticeboardListingJobDetailsFormComponent = props => (
             className={css.features}
             id={name}
             name={name}
-            options={config.custom.location} 
+            options={config.custom.jobLocation} 
           /> 
 
           <FormattedMessage id="Select child type:" />
@@ -90,7 +90,7 @@ const EditNoticeboardListingJobDetailsFormComponent = props => (
             className={css.features}
             id={name}
             name={name}
-            options={config.custom.children} 
+            options={config.custom.typeOfChild} 
           />
 
           <Button
