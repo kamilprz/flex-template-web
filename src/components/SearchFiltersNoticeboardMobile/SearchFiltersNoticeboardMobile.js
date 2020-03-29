@@ -53,7 +53,7 @@ class SearchFiltersMobileComponent extends Component {
 
     history.push(
       createResourceLocatorString(
-        'SearchPage',
+        'NoticeboardPage',
         routeConfiguration(),
         {},
         this.state.initialQueryParams
@@ -78,7 +78,7 @@ class SearchFiltersMobileComponent extends Component {
       ? { ...urlQueryParams, [urlParam]: option }
       : omit(urlQueryParams, urlParam);
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
   }
 
   handleSelectMultiple(urlParam, options) {
@@ -89,7 +89,7 @@ class SearchFiltersMobileComponent extends Component {
         ? { ...urlQueryParams, [urlParam]: options.join(',') }
         : omit(urlQueryParams, urlParam);
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
   }
 
   handlePrice(urlParam, range) {
@@ -100,7 +100,7 @@ class SearchFiltersMobileComponent extends Component {
         ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
         : omit(urlQueryParams, urlParam);
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
   }
 
   handleDateRange(urlParam, dateRange) {
@@ -115,7 +115,7 @@ class SearchFiltersMobileComponent extends Component {
       start != null && end != null
         ? { ...urlQueryParams, [urlParam]: `${start},${end}` }
         : omit(urlQueryParams, urlParam);
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
   }
 
   // Reset all filter query parameters
@@ -123,7 +123,7 @@ class SearchFiltersMobileComponent extends Component {
     const { urlQueryParams, history, filterParamNames } = this.props;
 
     const queryParams = omit(urlQueryParams, filterParamNames);
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
 
     // blur event target if event is passed
     if (e && e.currentTarget) {

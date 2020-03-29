@@ -86,10 +86,6 @@ const SearchFiltersNoticeboardComponent = props => {
     id: 'SearchFilters.categoryLabel',
   });
 
-  const filtersLabel = intl.formatMessage({
-    id: 'SearchFilters.filtersLabel',
-  });
-
   const initialTypeOfJob = typeOfJobFilter
     ? initialValues(urlQueryParams, typeOfJobFilter.paramName)
     : null;
@@ -120,7 +116,7 @@ const SearchFiltersNoticeboardComponent = props => {
         ? { ...urlQueryParams, [urlParam]: options.join(',') }
         : omit(urlQueryParams, urlParam);
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
   };
 
   const handleSelectOption = (urlParam, option) => {
@@ -130,7 +126,7 @@ const SearchFiltersNoticeboardComponent = props => {
       ? { ...urlQueryParams, [urlParam]: option }
       : omit(urlQueryParams, urlParam);
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
   };
 
   const handlePrice = (urlParam, range) => {
@@ -140,7 +136,7 @@ const SearchFiltersNoticeboardComponent = props => {
         ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
         : omit(urlQueryParams, urlParam);
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
   };
 
   const handleDateRange = (urlParam, dateRange) => {
@@ -154,7 +150,7 @@ const SearchFiltersNoticeboardComponent = props => {
       start != null && end != null
         ? { ...urlQueryParams, [urlParam]: `${start},${end}` }
         : omit(urlQueryParams, urlParam);
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
   };
 
   const categoryFilterElement = categoryFilter ? (

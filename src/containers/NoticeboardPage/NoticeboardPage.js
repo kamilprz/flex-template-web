@@ -71,11 +71,11 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
           options: typeOfJob,
         },
         typeOfChildFilter: {
-          paramName: 'pub_typeOfChild',
+          paramName: 'pub_jobDetails',
           options: typeOfChild,
         },
         timeframeFilter: {
-          paramName: 'pub_timeframe',
+          paramName: 'pub_jobDetails',
           options: timeframe,
         },
         priceFilter: {
@@ -120,7 +120,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
       const { viewportBounds, viewportCenter } = data;
 
       const routes = routeConfiguration();
-      const searchPagePath = pathByRouteName('SearchPage', routes);
+      const searchPagePath = pathByRouteName('NoticeboardPage', routes);
       const currentPath =
         typeof window !== 'undefined' && window.location && window.location.pathname;
 
@@ -151,7 +151,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
           ...validFilterParams(rest, this.filters()),
         };
 
-        history.push(createResourceLocatorString('SearchPage', routes, {}, searchParams));
+        history.push(createResourceLocatorString('NoticeboardPage', routes, {}, searchParams));
       }
     }
 
@@ -270,7 +270,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
             />
             <ModalInMobile
               className={css.mapPanel}
-              id="SearchPage.map"
+              id="NoticeboardPage.map"
               isModalOpenOnMobile={this.state.isSearchMapOpenOnMobile}
               onClose={() => this.setState({ isSearchMapOpenOnMobile: false })}
               showAsModalMaxWidth={MODAL_BREAKPOINT}

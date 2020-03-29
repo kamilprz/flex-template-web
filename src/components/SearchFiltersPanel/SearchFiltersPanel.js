@@ -61,7 +61,7 @@ class SearchFiltersPanelComponent extends Component {
 
     history.push(
       createResourceLocatorString(
-        'SearchPage',
+        'NoticeboardPage',
         routeConfiguration(),
         {},
         { ...urlQueryParams, ...this.state.currentQueryParams }
@@ -83,7 +83,7 @@ class SearchFiltersPanelComponent extends Component {
     const { urlQueryParams, history, onClosePanel, filterParamNames } = this.props;
 
     const queryParams = omit(urlQueryParams, filterParamNames);
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    history.push(createResourceLocatorString('NoticeboardPage', routeConfiguration(), {}, queryParams));
 
     // Ensure that panel closes (if now changes have been made)
     onClosePanel();
